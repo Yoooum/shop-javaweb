@@ -12,6 +12,12 @@ public class AdminInfo {
     public AdminInfo() {
     }
 
+    public AdminInfo(String name, String password, String level) {
+        this.name = name;
+        this.password = password;
+        this.level = level;
+    }
+
     public AdminInfo(Integer aid, String name, String password, String level) {
         this.aid = aid;
         this.name = name;

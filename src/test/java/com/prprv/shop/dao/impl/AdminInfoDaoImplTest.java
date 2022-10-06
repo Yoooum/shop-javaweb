@@ -11,6 +11,7 @@ import java.util.List;
  */
 class AdminInfoDaoImplTest {
 
+    //全查1，需要手动关闭数据库连接
     @Test
     void getAdminInfoList_() {
         List<AdminInfo> userList = new AdminInfoDaoImpl().getAdminInfoList_("select * from admin_info");
@@ -19,7 +20,7 @@ class AdminInfoDaoImplTest {
         }
         DBUtil.close();
     }
-
+    //全查2
     @Test
     void getAdminInfoList() {
         List<AdminInfo> userList = new AdminInfoDaoImpl().getAdminInfoList("select * from admin_info");
@@ -28,19 +29,29 @@ class AdminInfoDaoImplTest {
         }
     }
 
+    //条件查询
+    @Test
+    void queryAdminInfo() {
+        List<AdminInfo> list = new AdminInfoDaoImpl().queryAdminInfo("select * from admin_info where aid = ?", 10001);
+        list.forEach(System.out::println);
+    }
     @Test
     void addAdminInfo() {
         System.out.println(new AdminInfoDaoImpl().addAdminInfo(
-                new AdminInfo(null,"test","pwd","普通")
+                new AdminInfo("test","pwd","普通")
         ));
     }
 
     @Test
     void updateAdminInfo() {
+        System.out.println(new AdminInfoDaoImpl().updateAdminInfo(
+                new AdminInfo(5,"test","pwd","超级")
+        ));
+
     }
 
     @Test
     void deleteAdminInfo() {
-        System.out.println(new AdminInfoDaoImpl().deleteAdminInfo(4));
+        System.out.println(new AdminInfoDaoImpl().deleteAdminInfo(5));
     }
 }

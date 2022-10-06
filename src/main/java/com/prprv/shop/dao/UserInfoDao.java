@@ -10,6 +10,7 @@ import java.util.List;
  */
 public interface UserInfoDao {
     List<UserInfo> getUserList();
+    List<UserInfo> queryUserInfo(String sql, Object... params);
     UserInfo login(UserInfo userInfo);
     int addUserInfo(UserInfo userInfo);
     int updateUserInfo(UserInfo userInfo);

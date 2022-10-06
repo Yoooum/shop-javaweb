@@ -1,6 +1,6 @@
 package com.prprv.shop.pojo;
 
-import java.sql.Date;
+import java.time.LocalDateTime;
 
 /**
  * 商品信息
@@ -11,7 +11,7 @@ public class GoodsInfo {
     private Double price;//商品价格
     private String classify;//商品分类
     private Integer amount;//商品数量
-    private Date date;//商品上架时间
+    private LocalDateTime date;//商品上架时间
     private String imgUrl;//商品图片地址
     private Integer look;//商品浏览量
     private String intro;//商品说明
@@ -20,7 +20,19 @@ public class GoodsInfo {
     public GoodsInfo() {
     }
 
-    public GoodsInfo(Integer gid, String name, Double price, String classify, Integer amount, Date date, String imgUrl, Integer look, String intro, String brief) {
+    public GoodsInfo(String name, Double price, String classify, Integer amount, LocalDateTime date, String imgUrl, Integer look, String intro, String brief) {
+        this.name = name;
+        this.price = price;
+        this.classify = classify;
+        this.amount = amount;
+        this.date = date;
+        this.imgUrl = imgUrl;
+        this.look = look;
+        this.intro = intro;
+        this.brief = brief;
+    }
+
+    public GoodsInfo(Integer gid, String name, Double price, String classify, Integer amount, LocalDateTime date, String imgUrl, Integer look, String intro, String brief) {
         this.gid = gid;
         this.name = name;
         this.price = price;
@@ -73,11 +85,11 @@ public class GoodsInfo {
         this.amount = amount;
     }
 
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 

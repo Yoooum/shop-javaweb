@@ -11,6 +11,7 @@ import java.util.List;
 public interface AdminInfoDao {
     //查
     List<AdminInfo> getAdminInfoList(String sql) throws SQLException;
+    List<AdminInfo> queryAdminInfo(String sql, Object... params);
     //增
     int addAdminInfo(AdminInfo adminInfo);
     //改

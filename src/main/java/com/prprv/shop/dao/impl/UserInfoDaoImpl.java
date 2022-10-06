@@ -16,8 +16,19 @@ import java.util.Map;
 public class UserInfoDaoImpl implements UserInfoDao {
     @Override
     public List<UserInfo> getUserList() {
+
+        List<Map<String, Object>> mapList = DBUtil.query("select * from user_info");
+        return getUserList(mapList);
+    }
+
+    @Override
+    public List<UserInfo> queryUserInfo(String sql, Object... params) {
+        List<Map<String, Object>> mapList = DBUtil.query(sql, params);
+        return getUserList(mapList);
+    }
+
+    private List<UserInfo> getUserList(List<Map<String, Object>> mapList) {
         List<UserInfo> users = new ArrayList<>();
-        List<Map<String, Object>> mapList = DBUtil.query("select * from admin_info");
         for(Map<String, Object> userMap : mapList){
             UserInfo userInfo = new UserInfo();
             userInfo.setUid((Integer) userMap.get("uid"));
@@ -60,7 +71,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
     }
     @Override
     public int addUserInfo(UserInfo userInfo) {
-        return DBUtil.update("insert into admin_info(name,email,password) values(?,?,?)",
+        return DBUtil.update("insert into user_info(name,email,password) values(?,?,?)",
                 userInfo.getName(),userInfo.getEmail(),userInfo.getPassword()
         );
     }
@@ -69,7 +80,7 @@ public class UserInfoDaoImpl implements UserInfoDao {
     public int updateUserInfo(UserInfo userInfo) {
         return  DBUtil.update(
                 "update user_info set name = ?,email = ?,password = ? where uid = ?",
-                userInfo.getName(),userInfo.getEmail(),userInfo.getPassword()
+                userInfo.getName(),userInfo.getEmail(),userInfo.getPassword(),userInfo.getUid()
         );
     }
 

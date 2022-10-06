@@ -12,6 +12,12 @@ public class UserInfo {
     public UserInfo() {
     }
 
+    public UserInfo(String name, String email, String password) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+    }
+
     public UserInfo(Integer uid, String name, String email, String password) {
         this.uid = uid;
         this.name = name;
