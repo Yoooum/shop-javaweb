@@ -4,8 +4,6 @@ import com.prprv.shop.dao.AdminInfoDao;
 import com.prprv.shop.pojo.AdminInfo;
 import com.prprv.shop.util.DBUtil;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -22,27 +20,6 @@ public class AdminInfoDaoImpl implements AdminInfoDao {
         return getAdminList(list);
     }
 
-    /**
-     * 通过SQL语句查询管理员信息，需要手动关闭数据库连接
-     * @param sql SQL语句
-     * @return 管理员信息列表
-     */
-    public List<AdminInfo> getAdminInfoList_(String sql){
-        List<AdminInfo> adminInfoList = new ArrayList<>();
-        try (ResultSet resultSet = DBUtil.query_(sql)) {
-            while (resultSet.next()){
-                AdminInfo adminInfo = new AdminInfo();
-                adminInfo.setAid(resultSet.getInt("aid"));
-                adminInfo.setName(resultSet.getString("name"));
-                adminInfo.setPassword(resultSet.getString("password"));
-                adminInfo.setLevel(resultSet.getString("level"));
-                adminInfoList.add(adminInfo);
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return adminInfoList;
-    }
 
     @Override
     public List<AdminInfo> queryAdminInfo(String sql, Object... params) {

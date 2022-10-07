@@ -101,46 +101,6 @@ public class DBUtil {
     }
 
     /**
-     * 返回查询结果，只有列值
-     */
-    public static Object[] queryList(String sql, Object... params) {
-        try {
-            setParams(sql, params);
-            resultSet = preparedStatement.executeQuery();
-            ResultSetMetaData metaData = resultSet.getMetaData();
-            int columnCount = metaData.getColumnCount();
-            Object[] columnData = new Object[columnCount];
-            if (resultSet.next()) {
-                for (int i = 0; i < columnCount; i++) {
-                    columnData[i] = resultSet.getObject(i + 1);
-                }
-                return columnData;
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        } finally {
-            close();
-        }
-        return null;
-    }
-
-    /**
-     * 数据库查询，根据传入的参数个数动态设置占位符参数的值
-     * @param sql    SQL语句，包含一个或多个'?'参数占位符
-     * @param params 参数列表，与SQL语句中的'?'参数占位符对应
-     * @return 数据库查询结果集
-     */
-    public static ResultSet query_(String sql, Object... params) {
-        try {
-            setParams(sql, params);
-            resultSet = preparedStatement.executeQuery();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return resultSet;
-    }
-
-    /**
      * 数据库增删改，根据传入的参数个数动态设置占位符参数的值
      * @param sql    SQL语句，包含一个或多个'?'参数占位符
      * @param params 参数列表，与SQL语句中的'?'参数占位符对应

@@ -20,10 +20,10 @@ class GoodsInfoDaoImplTest {
     void queryGoodsInfo() {
         List<GoodsInfo> list = new GoodsInfoDaoImpl().queryGoodsInfo(
                 "select * from goods_info where name like ?", "%test%");
-//        list.forEach(System.out::println);
-        for (GoodsInfo goodsInfo : list) {
-            System.out.println(goodsInfo);
-        }
+        list.forEach(System.out::println);
+//        for (GoodsInfo goodsInfo : list) {
+//            System.out.println(goodsInfo);
+//        }
     }
 
     @Test

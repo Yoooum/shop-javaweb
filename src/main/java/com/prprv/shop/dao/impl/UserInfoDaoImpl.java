@@ -4,8 +4,6 @@ import com.prprv.shop.dao.UserInfoDao;
 import com.prprv.shop.pojo.UserInfo;
 import com.prprv.shop.util.DBUtil;
 
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -54,21 +52,6 @@ public class UserInfoDaoImpl implements UserInfoDao {
         return user;
     }
 
-    public UserInfo login_(UserInfo userInfo){
-        UserInfo user = new UserInfo();
-        try (ResultSet resultSet = DBUtil.query_("select uid,name,email,password from user_info where email = ? and password = ?",
-                userInfo.getEmail(),userInfo.getPassword())) {
-            while (resultSet.next()){
-                user.setUid(resultSet.getInt("uid"));
-                user.setName(resultSet.getString("name"));
-                user.setEmail(resultSet.getString("email"));
-                user.setPassword(resultSet.getString("password"));
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
-        return user;
-    }
     @Override
     public int addUserInfo(UserInfo userInfo) {
         return DBUtil.update("insert into user_info(name,email,password) values(?,?,?)",

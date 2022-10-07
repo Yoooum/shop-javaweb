@@ -1,7 +1,6 @@
 package com.prprv.shop.dao.impl;
 
 import com.prprv.shop.pojo.AdminInfo;
-import com.prprv.shop.util.DBUtil;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;
@@ -11,15 +10,6 @@ import java.util.List;
  */
 class AdminInfoDaoImplTest {
 
-    //全查1，需要手动关闭数据库连接
-    @Test
-    void getAdminInfoList_() {
-        List<AdminInfo> userList = new AdminInfoDaoImpl().getAdminInfoList_("select * from admin_info");
-        for(AdminInfo adminInfo : userList){
-            System.out.println(adminInfo);
-        }
-        DBUtil.close();
-    }
     //全查2
     @Test
     void getAdminInfoList() {

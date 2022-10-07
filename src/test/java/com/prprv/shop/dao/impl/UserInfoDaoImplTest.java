@@ -80,8 +80,4 @@ class UserInfoDaoImplTest {
         System.out.println(new UserInfoDaoImpl().login(new UserInfo(null,null,"test@p.p","test")));
     }
 
-    @Test
-    void login_() {
-        System.out.println(new UserInfoDaoImpl().login_(new UserInfo(null,null,"test@p.p","test")));
-    }
 }
