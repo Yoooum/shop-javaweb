@@ -36,7 +36,7 @@ public class LoginServlet extends HttpServlet {
             //登录失败
             out.print("<script>");
             out.print("alert('登录失败');");
-            out.print("location.href='/login.jsp';");
+            out.print("location.href='/shop/login.jsp';");
             out.print("</script>");
         }
     }
