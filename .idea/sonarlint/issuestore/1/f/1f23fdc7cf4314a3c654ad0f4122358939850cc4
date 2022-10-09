@@ -1,13 +1,0 @@
-
-g	java:S112+"FDefine and throw a dedicated exception instead of using a generic one.(Ò‚Òéüÿÿÿÿ8–ºÚóµ0
-r	java:S117"QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(‘†Ã£ıÿÿÿÿ8—ºÚóµ0
-m	java:S117 "QRename this local variable to match the regular expression '^[a-z][a-zA-Z0-9]*$'.(°’ıÊ8—ºÚóµ0
-l
-java:S2095%"OUse try-with-resources or close this "PreparedStatement" in a "finally" clause.(ĞÀœ¢8³ºÚóµ0
-e
-java:S2095$"HUse try-with-resources or close this "Connection" in a "finally" clause.(úƒŸÊ8³ºÚóµ0
-]	java:S125"<This block of commented-out lines of code should be removed.(ıí—úÿÿÿÿ8ÂºÚóµ0
-c
-java:S1989+"AHandle the "RuntimeException" thrown here in a "try/catch" block.(Ò‚Òéüÿÿÿÿ8ÆºÚóµ0
-]
-java:S1128";Remove this unused import 'com.prprv.jsplearn.util.DBUtil'.(‰‰¶öûÿÿÿÿ8ÊºÚóµ0
