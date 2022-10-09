@@ -17,13 +17,17 @@ class GoodsInfoDaoImplTest {
     }
 
     @Test
+    void queryGoodsInfoAll() {
+        List<GoodsInfo> list = new GoodsInfoDaoImpl().queryGoodsInfo(
+                "select * from goods_info");
+        list.forEach(System.out::println);
+    }
+
+    @Test
     void queryGoodsInfo() {
         List<GoodsInfo> list = new GoodsInfoDaoImpl().queryGoodsInfo(
                 "select * from goods_info where name like ?", "%test%");
         list.forEach(System.out::println);
-//        for (GoodsInfo goodsInfo : list) {
-//            System.out.println(goodsInfo);
-//        }
     }
 
     @Test

@@ -76,13 +76,5 @@ class DBUtilTest {
 //        }
 //    }
 
-    @Test
-    void queryList() {
-        Object[] obj = DBUtil.queryList("select * from admin_info");
-        if (obj != null) {
-            for (Object o : obj) {
-                System.out.println(o);
-            }
-        }
-    }
+
 }
