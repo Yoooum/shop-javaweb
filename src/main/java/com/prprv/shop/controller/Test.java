@@ -18,12 +18,12 @@ public class Test extends HttpServlet {
     }
 
     public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
-        resp.setContentType("text/html,charset=utf-8");
-        req.setCharacterEncoding("UTF-8");
-        PrintWriter out = resp.getWriter();
-        out.println("<h1>" + message + "</h1>");
-        List<UserInfo> userList = new UserInfoDaoImpl().queryUserInfo();
-        req.setAttribute("userList",userList);
+//        resp.setContentType("text/html,charset=utf-8");
+//        req.setCharacterEncoding("UTF-8");
+//        PrintWriter out = resp.getWriter();
+//        out.println("<h1>" + message + "</h1>");
+//        List<UserInfo> userList = new UserInfoDaoImpl().queryUserInfo();
+//        req.setAttribute("userList",userList);
         req.getRequestDispatcher("login.jsp").forward(req,resp);
     }
 }

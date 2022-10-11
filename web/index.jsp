@@ -74,7 +74,7 @@
             <div class="site-meta">
                 <h1 class="site-name">
                     <% if(session.getAttribute("username") == null) {
-                        out.print("<a style=\"cursor: pointer\" href='login.jsp'>登录</a>");
+                        out.print("<a style=\"cursor: pointer\" href='login'>登录</a>");
                     } else {
                         out.print("<a>" + session.getAttribute("username") + "</a>");
                     } %>
