@@ -1,6 +1,7 @@
 package com.prprv.shop.dao.impl;
 
 import com.prprv.shop.dao.UserInfoDao;
+import com.prprv.shop.pojo.AdminInfo;
 import com.prprv.shop.pojo.UserInfo;
 import com.prprv.shop.util.DBUtil;
 
@@ -12,9 +13,19 @@ import java.util.Map;
  * @author 未確認の庭師
  */
 public class UserInfoDaoImpl implements UserInfoDao {
+    public List<UserInfo> login(String name, String password){
+        String sql = "select * from user_info where name = ? and password = ?";
+        List<Map<String,Object>> list = DBUtil.query(sql,name,password);
+        return getUserList(list);
+    }
     @Override
     public List<UserInfo> getUserList() {
 
+        List<Map<String, Object>> mapList = DBUtil.query("select * from user_info");
+        return getUserList(mapList);
+    }
+
+    public List<UserInfo> queryUserInfo() {
         List<Map<String, Object>> mapList = DBUtil.query("select * from user_info");
         return getUserList(mapList);
     }

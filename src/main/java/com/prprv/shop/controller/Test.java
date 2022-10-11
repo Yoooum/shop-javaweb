@@ -1,35 +1,29 @@
 package com.prprv.shop.controller;// 导入必需的 java 库
+
+import com.prprv.shop.dao.impl.UserInfoDaoImpl;
+import com.prprv.shop.pojo.UserInfo;
+
 import java.io.*;
-import javax.servlet.*;
+import java.util.List;
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;
 
 // 扩展 HttpServlet 类
 @WebServlet(name = "HelloForm", urlPatterns = "/hello")
 public class Test extends HttpServlet {
-
     private String message;
-
-    public void init() throws ServletException
-    {
-        // 执行必需的初始化
+    public void init() {
         message = "Hello World";
     }
 
-    public void doGet(HttpServletRequest request,
-                      HttpServletResponse response)
-            throws ServletException, IOException
-    {
-        // 设置响应内容类型
-        response.setContentType("text/html");
-
-        // 实际的逻辑是在这里
-        PrintWriter out = response.getWriter();
+    public void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        resp.setContentType("text/html,charset=utf-8");
+        req.setCharacterEncoding("UTF-8");
+        PrintWriter out = resp.getWriter();
         out.println("<h1>" + message + "</h1>");
-    }
-
-    public void destroy()
-    {
-        // 什么也不做
+        List<UserInfo> userList = new UserInfoDaoImpl().queryUserInfo();
+        req.setAttribute("userList",userList);
+        req.getRequestDispatcher("test.jsp").forward(req,resp);
     }
 }

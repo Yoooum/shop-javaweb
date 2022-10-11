@@ -1,9 +1,9 @@
 package com.prprv.shop.controller;
 
 
-import com.prprv.shop.dao.impl.UserInfoDaoImpl;
-import com.prprv.shop.pojo.UserInfo;
+import com.prprv.shop.service.IsLoginImpl;
 
+import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -18,19 +18,18 @@ import java.io.PrintWriter;
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
         //调用请求对象
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        //验证登录
-        UserInfo userInfo = new UserInfoDaoImpl().login(new UserInfo(null, null, email, password));
+
         //调用响应对象
         resp.setContentType("text/html;charset=utf-8");
         PrintWriter out = resp.getWriter();
-        if (userInfo.getEmail() != null && userInfo.getPassword() != null) {
+        if (new IsLoginImpl().user(email,password)) {
             //登录成功
             HttpSession session = req.getSession();
-            session.setAttribute("username", userInfo.getName());
+            session.setAttribute("username", email);
             resp.sendRedirect("/shop/");
         } else {
             //登录失败

@@ -9,6 +9,15 @@ import java.util.List;
 import java.util.Map;
 
 public class AdminInfoDaoImpl implements AdminInfoDao {
+    public List<AdminInfo> login(String name, String password){
+        String sql = "select * from admin_info where name = ? and password = ?";
+        List<Map<String,Object>> list = DBUtil.query(sql,name,password);
+        return getAdminList(list);
+    }
+
+    public void queryAdmin(Object... params) {
+
+    }
     /**
      * 通过SQL语句查询管理员信息，自动关闭数据库连接
      * @param sql SQL语句
@@ -20,6 +29,10 @@ public class AdminInfoDaoImpl implements AdminInfoDao {
         return getAdminList(list);
     }
 
+    public List<AdminInfo> queryAdminInfo() {
+        List<Map<String, Object>> list = DBUtil.query("select * from admin_info");
+        return getAdminList(list);
+    }
 
     @Override
     public List<AdminInfo> queryAdminInfo(String sql, Object... params) {
