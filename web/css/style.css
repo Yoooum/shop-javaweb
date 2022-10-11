@@ -127,7 +127,7 @@ h1 {
 	line-height: 50px;
 	font-size: 22px;
 	font-weight: normal;
-	font-family: "Microsoft YaHei", SimHei;
+	font-family: "Microsoft YaHei", SimHei, serif;
 }
 .download {
 	display: block;

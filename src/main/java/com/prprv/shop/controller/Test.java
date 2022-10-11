@@ -24,6 +24,6 @@ public class Test extends HttpServlet {
         out.println("<h1>" + message + "</h1>");
         List<UserInfo> userList = new UserInfoDaoImpl().queryUserInfo();
         req.setAttribute("userList",userList);
-        req.getRequestDispatcher("test.jsp").forward(req,resp);
+        req.getRequestDispatcher("login.jsp").forward(req,resp);
     }
 }
