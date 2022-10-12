@@ -1,5 +1,11 @@
 package com.prprv.shop.util;
 
+import org.yaml.snakeyaml.Yaml;
+
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -17,10 +23,10 @@ import java.util.Map;
  * 数据库访问工具类
  */
 public class DBUtil {
-    private static final String DRIVER = "com.mysql.cj.jdbc.Driver";//数据库驱动
-    private static final String URL = "jdbc:mysql://localhost:53306/v_store";//数据库连接地址
-    private static final String NAME = "root";//数据库用户名
-    private static final String PASSWORD = "1234567890dd@";//数据库密码
+    private static final String DRIVER;//数据库驱动
+    private static final String URL;//数据库连接地址
+    private static final String USERNAME;//数据库用户名
+    private static final String PASSWORD;//数据库密码
     private static Connection connection;
     private static PreparedStatement preparedStatement;
     private static ResultSet resultSet;
@@ -34,8 +40,16 @@ public class DBUtil {
     static {
         //静态代码块，加载驱动，只加载一次
         try {
+            //加载数据库信息
+            Yaml yaml = new Yaml();
+            InputStream inputStream = DBUtil.class.getResourceAsStream("/database_.yml");
+            Map<String,String> map = yaml.load(inputStream);
+            DRIVER = map.get("driver");
+            URL = map.get("url");
+            USERNAME = map.get("username");
+            PASSWORD = map.get("password");
             Class.forName(DRIVER);
-        } catch (ClassNotFoundException e) {
+        } catch (ClassNotFoundException | NullPointerException e) {
             throw new RuntimeException(e);
         }
     }
@@ -46,7 +60,7 @@ public class DBUtil {
      */
     private static Connection connected() {
         try {
-            return DriverManager.getConnection(URL, NAME, PASSWORD);
+            return DriverManager.getConnection(URL, USERNAME, PASSWORD);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
