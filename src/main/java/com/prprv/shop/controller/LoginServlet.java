@@ -1,9 +1,10 @@
 package com.prprv.shop.controller;
 
 
-import com.prprv.shop.service.IsLoginImpl;
+import com.prprv.shop.pojo.UserInfo;
+import com.prprv.shop.service.Login;
+import com.prprv.shop.service.impl.LoginImpl;
 
-import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -24,30 +25,37 @@ public class LoginServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         req.getRequestDispatcher("login.jsp").forward(req,resp);
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
+        // req.setCharacterEncoding("UTF-8")的作用是设置对客户端请求进行重新编码的编码
+        // resp.setCharacterEncoding("UTF-8")的作用是指定对服务器响应进行重新编码的编码
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
         //调用请求对象
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-
-        PrintWriter out = resp.getWriter();
-        if (new IsLoginImpl().user(email,password)) {
-            //登录成功
-            HttpSession session = req.getSession();
-            session.setAttribute("username", email);
-            resp.sendRedirect("/");
+        if(email != null || password != null){
+            Login login = new LoginImpl();
+            if(login.hasUser(email,password)){
+                HttpSession session = req.getSession();
+                UserInfo userInfo = login.getUserInfo(email);
+                session.setAttribute("username",userInfo.getName());
+                session.setAttribute("email",userInfo.getEmail());
+                //req.getRequestDispatcher("index.jsp").forward(req,resp);
+                resp.sendRedirect("/");
+            }
         } else {
-            //登录失败
-            req.setAttribute("message", "邮箱或密码错误");
             req.getRequestDispatcher("login.jsp").forward(req,resp);
+            //resp.sendRedirect("/login.jsp");
         }
+
     }
 }
+
+
+
 

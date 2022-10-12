@@ -15,6 +15,8 @@ import java.io.IOException;
 public class RouterFilter implements Filter {
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain) throws IOException, ServletException {
+        String path = servletRequest.getServletContext().getContextPath();
+        System.out.println(path);
         //放行
         filterChain.doFilter(servletRequest, servletResponse);
         String uri = servletRequest.getServletContext().getContextPath();
