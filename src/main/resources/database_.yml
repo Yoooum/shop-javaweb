@@ -1,0 +1,5 @@
+# 数据库信息
+driver: com.mysql.cj.jdbc.Driver
+url: jdbc:mysql://localhost:53306/v_store
+username: root
+password: 1234567890dd@

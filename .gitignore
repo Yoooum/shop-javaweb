@@ -1,7 +1,6 @@
 # 项目排除路径
 /out/
 /target/
-.idea
+/.idea/
 *.iml
 database.yml
-database_.yml
