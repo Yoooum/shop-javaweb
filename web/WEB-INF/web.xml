@@ -18,4 +18,14 @@
 <!--        <servlet-name>Test</servlet-name>-->
 <!--        <url-pattern>/hello</url-pattern>-->
 <!--    </servlet-mapping>-->
+
+    <!-- 如果不想 url 后面显示 .jsp 扩展名，可以在 web.xml 指定。 -->
+<!--    <servlet>-->
+<!--        <servlet-name>service</servlet-name>-->
+<!--        <jsp-file>/public/service.jsp</jsp-file>-->
+<!--    </servlet>-->
+<!--    <servlet-mapping>-->
+<!--        <servlet-name>service</servlet-name>-->
+<!--        <url-pattern>/service/projectcase/*</url-pattern>-->
+<!--    </servlet-mapping>-->
 </web-app>

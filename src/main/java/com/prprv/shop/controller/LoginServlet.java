@@ -12,20 +12,19 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.io.Serial;
+
 
 /**
  * @author 未確認の庭師
  */
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
-    @Serial
+
     private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("login.jsp").forward(req,resp);
+        req.getRequestDispatcher("login.jsp").forward(req, resp);
     }
 
     @Override
@@ -38,18 +37,19 @@ public class LoginServlet extends HttpServlet {
         //调用请求对象
         String email = req.getParameter("email");
         String password = req.getParameter("password");
-        if(email != null || password != null){
-            Login login = new LoginImpl();
-            if(login.hasUser(email,password)){
-                HttpSession session = req.getSession();
-                UserInfo userInfo = login.getUserInfo(email);
-                session.setAttribute("username",userInfo.getName());
-                session.setAttribute("email",userInfo.getEmail());
-                //req.getRequestDispatcher("index.jsp").forward(req,resp);
-                resp.sendRedirect("/");
-            }
+
+        Login login = new LoginImpl();
+        if (login.hasUser(email, password)) {
+            HttpSession session = req.getSession();
+            UserInfo userInfo = login.getUserInfo(email);
+            session.setAttribute("username", userInfo.getName());
+            session.setAttribute("email", userInfo.getEmail());
+            session.setAttribute("uid", userInfo.getUid());
+            //req.getRequestDispatcher("index.jsp").forward(req,resp);
+            resp.sendRedirect("/");
         } else {
-            req.getRequestDispatcher("login.jsp").forward(req,resp);
+            req.getRequestDispatcher("/login.jsp").forward(req, resp);
+            //resp.setHeader("Location","/login");
             //resp.sendRedirect("/login.jsp");
         }
 
