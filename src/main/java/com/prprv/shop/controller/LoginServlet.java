@@ -1,7 +1,7 @@
 package com.prprv.shop.controller;
 
 
-import com.prprv.shop.pojo.UserInfo;
+import com.prprv.shop.pojo_old.UserInfo;
 import com.prprv.shop.service.Login;
 import com.prprv.shop.service.impl.LoginImpl;
 
@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.Serial;
 
 
 /**
@@ -20,6 +21,7 @@ import java.io.IOException;
 @WebServlet(name = "LoginServlet", urlPatterns = "/login")
 public class LoginServlet extends HttpServlet {
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     @Override

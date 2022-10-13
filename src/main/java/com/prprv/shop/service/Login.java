@@ -1,9 +1,6 @@
 package com.prprv.shop.service;
 
-import com.prprv.shop.pojo.UserInfo;
-
-import java.util.Map;
-import java.util.Objects;
+import com.prprv.shop.pojo_old.UserInfo;
 
 /**
  * @author 未確認の庭師

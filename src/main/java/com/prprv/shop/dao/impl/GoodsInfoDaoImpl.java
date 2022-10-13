@@ -1,13 +1,10 @@
 package com.prprv.shop.dao.impl;
 
 import com.prprv.shop.dao.GoodsInfoDao;
-import com.prprv.shop.pojo.GoodsInfo;
+import com.prprv.shop.pojo_old.GoodsInfo;
 import com.prprv.shop.util.DBUtil;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;

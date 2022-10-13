@@ -42,7 +42,7 @@ public class DBUtil {
         try {
             //加载数据库信息
             Yaml yaml = new Yaml();
-            InputStream inputStream = DBUtil.class.getResourceAsStream("/database.yml");
+            InputStream inputStream = DBUtil.class.getResourceAsStream("/database_.yml");
             Map<String,String> map = yaml.load(inputStream);
             DRIVER = map.get("driver");
             URL = map.get("url");

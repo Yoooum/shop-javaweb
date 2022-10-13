@@ -2,8 +2,8 @@ package com.prprv.shop.service.impl;
 
 import com.prprv.shop.dao.impl.AdminInfoDaoImpl;
 import com.prprv.shop.dao.impl.UserInfoDaoImpl;
-import com.prprv.shop.pojo.AdminInfo;
-import com.prprv.shop.pojo.UserInfo;
+import com.prprv.shop.pojo_old.AdminInfo;
+import com.prprv.shop.pojo_old.UserInfo;
 import com.prprv.shop.service.Login;
 
 import java.util.List;

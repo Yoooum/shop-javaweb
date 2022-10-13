@@ -1,10 +1,6 @@
 package com.prprv.shop.controller;// 导入必需的 java 库
 
-import com.prprv.shop.dao.impl.UserInfoDaoImpl;
-import com.prprv.shop.pojo.UserInfo;
-
 import java.io.*;
-import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.*;

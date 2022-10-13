@@ -1,4 +1,4 @@
-package com.prprv.shop.pojo;
+package com.prprv.shop.pojo_old;
 
 /**
  * 用户信息

@@ -1,7 +1,7 @@
 package com.prprv.shop.dao.impl;
 
 import com.prprv.shop.dao.AdminInfoDao;
-import com.prprv.shop.pojo.AdminInfo;
+import com.prprv.shop.pojo_old.AdminInfo;
 import com.prprv.shop.util.DBUtil;
 
 import java.util.ArrayList;

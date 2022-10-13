@@ -1,6 +1,6 @@
 package com.prprv.shop.dao;
 
-import com.prprv.shop.pojo.AdminInfo;
+import com.prprv.shop.pojo_old.AdminInfo;
 
 import java.sql.SQLException;
 import java.util.List;

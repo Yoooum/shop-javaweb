@@ -1,6 +1,6 @@
 package com.prprv.shop.dao.impl;
 
-import com.prprv.shop.pojo.AdminInfo;
+import com.prprv.shop.pojo_old.AdminInfo;
 import org.junit.jupiter.api.Test;
 
 import java.util.List;

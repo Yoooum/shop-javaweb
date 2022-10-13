@@ -1,6 +1,6 @@
 package com.prprv.shop.dao;
 
-import com.prprv.shop.pojo.GoodsInfo;
+import com.prprv.shop.pojo_old.GoodsInfo;
 
 import java.util.List;
 

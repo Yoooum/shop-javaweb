@@ -1,13 +1,6 @@
 package com.prprv.shop.util;
 
-import com.prprv.shop.pojo.AdminInfo;
 import org.junit.jupiter.api.Test;
-
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
-import java.util.List;
-import java.util.Map;
 
 /**
  * @author 未確認の庭師
@@ -60,6 +53,11 @@ class DBUtilTest {
     @Test
     void close(){
         DBUtil.close();
+    }
+
+    @Test
+    void connected() {
+//        System.out.println(DBUtil.connected());
     }
 
 
