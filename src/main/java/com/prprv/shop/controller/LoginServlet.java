@@ -1,6 +1,8 @@
 package com.prprv.shop.controller;
 
 
+import com.prprv.shop.dao.impl.GoodsInfoDaoImpl;
+import com.prprv.shop.pojo_old.GoodsInfo;
 import com.prprv.shop.pojo_old.UserInfo;
 import com.prprv.shop.service.Login;
 import com.prprv.shop.service.impl.LoginImpl;
@@ -13,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.Serial;
+import java.util.List;
 
 
 /**
@@ -47,8 +50,10 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("username", userInfo.getName());
             session.setAttribute("email", userInfo.getEmail());
             session.setAttribute("uid", userInfo.getUid());
-            //req.getRequestDispatcher("index.jsp").forward(req,resp);
-            resp.sendRedirect("/");
+            List<GoodsInfo> list = new GoodsInfoDaoImpl().getGoodsInfoList();
+            req.setAttribute("goodsList",list);
+            req.getRequestDispatcher("index.jsp").forward(req,resp);
+            //resp.sendRedirect("/");
         } else {
             req.getRequestDispatcher("/login.jsp").forward(req, resp);
             //resp.setHeader("Location","/login");

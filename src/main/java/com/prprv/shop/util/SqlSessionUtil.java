@@ -12,7 +12,7 @@ import java.io.InputStream;
  * @author 未確認の庭師
  */
 public class SqlSessionUtil {
-    public static SqlSession getSqlSession(){
+    public static SqlSession getSession(){
         SqlSession sqlSession;
         try {
             InputStream inputStream = Resources.getResourceAsStream("mybatis.xml");

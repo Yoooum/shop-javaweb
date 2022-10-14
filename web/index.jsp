@@ -1,3 +1,4 @@
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
@@ -184,7 +185,15 @@
 
 
     <main class="main full-width">
-        <section class="article-list"></section>
+        <section class="article-list">
+            <%=request.getAttribute("goodsList")%>
+            <c:forEach items="${requestScope.goodsList}" var="glist">
+                <tr>
+                    <td>${glist.gid}</td>
+                    <td>${glist.name}</td>
+                </tr>
+            </c:forEach>
+        </section>
         <nav class='pagination'>
             <span class='page-link current'>1</span>
             <a class='page-link' href='/page/2/'>2</a>
