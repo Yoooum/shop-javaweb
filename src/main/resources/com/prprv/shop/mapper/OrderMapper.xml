@@ -3,5 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.prprv.shop.mapper.OrderMapper">
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="oid">
+        insert into info_order
+        values (null,#{uid},#{status},#{date},#{phone},#{price},#{address})
+    </insert>
+
+    <delete id="deleteOrder">
+        delete from info_order where oid = #{oid}
+    </delete>
+
+    <update id="updateOrder">
+        update info_order set
+            uid=#{uid},status=#{status},date=#{date},phone=#{phone},price=#{price},address=#{address}
+        where oid=#{oid}
+    </update>
+
+    <select id="selectOrderById" resultType="Order">
+        select * from info_order where oid = #{oid}
+    </select>
 
 </mapper>

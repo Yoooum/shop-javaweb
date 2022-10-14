@@ -3,5 +3,32 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.prprv.shop.mapper.GoodsMapper">
+    <insert id="insertGoods" useGeneratedKeys="true" keyProperty="gid">
+        insert into info_goods
+        values (null,#{name},#{price},#{classify},#{amount},#{date},#{img},#{look},#{intro},#{brief})
+    </insert>
+
+    <delete id="deleteGoods">
+        delete from info_goods where gid = #{gid}
+    </delete>
+
+    <update id="updateGoods">
+        update info_goods set
+            name=#{name},price=#{price},classify=#{classify},amount=#{amount},
+            date=#{date},img=#{img},look=#{look},intro=#{intro},brief=#{brief}
+        where gid=#{gid}
+    </update>
+
+    <select id="selectGoodsById" resultType="Goods">
+        select * from info_goods where gid = #{gid}
+    </select>
+
+    <select id="selectGoodsByName" resultType="Goods">
+        select * from info_goods where name = #{name}
+    </select>
+
+    <select id="selectAllGoods" resultType="Goods">
+        select * from info_goods
+    </select>
 
 </mapper>

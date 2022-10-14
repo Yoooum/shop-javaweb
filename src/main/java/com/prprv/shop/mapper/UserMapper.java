@@ -11,7 +11,7 @@ import java.util.Map;
  * @author 未確認の庭師
  */
 public interface UserMapper {
-    //新增用户，同时获取自增的主键 uid 的 user 对象
+    //新增用户，同时返回自增的主键 uid 到 user 对象
     void insertUser(User user);
     //通过 uid 删除用户
     int deleteUser(@Param("uid") Integer uid);
