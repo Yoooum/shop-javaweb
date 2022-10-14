@@ -5,17 +5,17 @@ public class User {
   private String email;
   private String username;
   private String password;
-  private Boolean isAdmin;
+  private Boolean is_admin;
 
   public User() {
   }
 
-  public User(Integer uid, String email, String username, String password, Boolean isAdmin) {
+  public User(Integer uid, String email, String username, String password, Boolean is_admin) {
     this.uid = uid;
     this.email = email;
     this.username = username;
     this.password = password;
-    this.isAdmin = isAdmin;
+    this.is_admin = is_admin;
   }
 
   public Integer getUid() {
@@ -51,11 +51,11 @@ public class User {
   }
 
   public Boolean getAdmin() {
-    return isAdmin;
+    return is_admin;
   }
 
-  public void setAdmin(Boolean admin) {
-    isAdmin = admin;
+  public void setAdmin(Boolean is_admin) {
+    this.is_admin = is_admin;
   }
 
   @Override
@@ -65,7 +65,7 @@ public class User {
             ", email='" + email + '\'' +
             ", username='" + username + '\'' +
             ", password='" + password + '\'' +
-            ", isAdmin=" + isAdmin +
+            ", is_admin=" + is_admin +
             '}';
   }
 }
