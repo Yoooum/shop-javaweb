@@ -1,4 +1,4 @@
-POST http://localhost:8080/data/login
+POST http://localhost:8080/data/loginService
 Accept: application/json
 Content-Type: application/x-www-form-urlencoded
 

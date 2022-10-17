@@ -51,8 +51,8 @@
                 <%
                     if (session.getAttribute("email") == null) {
                 %>
-                <%@ include file="login.jsp"%>
-<%--                <jsp:forward page="login.jsp"/>--%>
+                <%@ include file="loginService.jsp"%>
+<%--                <jsp:forward page="loginService.jsp"/>--%>
                 <%
                     } else {
                         out.println(session.getAttribute("email") + "你好,<br/>欢迎你光顾本店!!!");

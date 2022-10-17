@@ -19,6 +19,7 @@
     <meta property='og:site_name' content='未確認の庭師'>
     <meta property='og:type' content='website'>
     <meta property='og:updated_time' content=' 2022-08-16T13:02:20&#43;08:00 '/>
+    <meta name="referrer" content="no-referrer"/>
     <meta name="twitter:title" content="未確認の庭師">
     <meta name="twitter:description" content="Prprprprprprprpr---!">
     <link rel="alternate" type="application/rss&#43;xml" href="https://prprv.com/index.xml">
@@ -35,6 +36,8 @@
             list-style: none;
             width: 130px;
             margin: 20px;
+            overflow: hidden;
+            text-overflow: ellipsis;
             /*height: 300px;*/
             /*border-radius: 10px;*/
             /*background-color: #fff;*/
@@ -49,8 +52,12 @@
             margin-bottom: 10px;
         }
         .book-list div ul li > a {
+            display: block;
             font-size: 16px;
             font-weight: bold;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
         .book-cart-add a{
             font-size: 18px;
@@ -91,16 +98,32 @@
             showName.text(localStorage.getItem('username'))
         }
 
-        //
-        for (let i = 0; i < 12; i++) {
-            let book = $('.book-list-ul li:eq(0)').clone(true)
-            $('.book-list-ul').append(book)
-        }
-        $('.book-list-ul li').each(function (index, element) {
-            $(element).children('a').text('书名' + index)
-            $(element).find('.goods-id').text(index)
-            $(element).children('img').attr('src', 'img/book/s33956867.jpg')
+        let bookAllList = []
+        $.ajax({
+            url: "/data/goods?goods_list=all",
+            type: "get",
+            success: function (data){
+                bookAllList = JSON.parse(data)
+                for(let book in bookAllList){
+                    console.log(bookAllList[book])
+                    let book_li = $('.book-list-ul li:eq(0)').clone(true)
+                    $('.book-list-ul').append(book_li)
+                }
+                $('.book-list-ul li').each(function (index, element) {
+                    $(element).children('a').text(bookAllList[index].name)
+                    $(element).find('.goods-id').text(bookAllList[index].gid)
+                    $(element).children('img').attr('src', bookAllList[index].img)
+                    $(element).children('.book-cart-add').children('a:eq(0)').text('¥'+bookAllList[index].price)
+                })
+            }
+
         })
+
+        // $('.book-list-ul li').each(function (index, element) {
+        //     $(element).children('a').text('书名' + index)
+        //     $(element).find('.goods-id').text(index)
+        //     $(element).children('img').attr('src', 'https://img1.doubanio.com/view/subject/l/public/s33956867.jpg')
+        // })
 
         //购物车物品ID列表
         let bookList = []
