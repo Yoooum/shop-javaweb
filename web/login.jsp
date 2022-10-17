@@ -1,3 +1,4 @@
+<%--<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>--%>
 <%@ page contentType="text/html;charset=UTF-8"%>
 <!DOCTYPE html>
 <html lang="zh">
@@ -237,14 +238,14 @@
         $(".input-password .form-label").slideToggle("fast");
         $(".reg-show").toggle();
         if ($(this).hasClass("now-forget")) {
-          $(".login-form form").attr("action", "/login");
+          $(".login-form form").attr("action", "/data/login");
           $(this).removeClass("now-forget");
           $(this).text("忘记密码？");
           $(".forget-text").text("密码");
           $(".form-submit,.login-title").text("登录");
         } else {
           $(this).addClass("now-forget");
-          $(".login-form form").attr("action", "/forget");
+          $(".login-form form").attr("action", "/data/forget");
           $(this).text("返回登录？");
           $(".forget-text").text("重置链接将发送到邮箱");
           $(".form-submit").text("发送");
@@ -257,47 +258,51 @@
         $(".pwd-forget").toggle();
         if ($(this).hasClass("form-login")) {
           $(this).removeClass("form-login");
-          $(".login-form form").attr("action", "/register");
+          $(".login-form form").attr("action", "/data/register");
           $(".login-title,.form-submit").text("注册");
           $(".no-account").text("已有账号？");
           $(this).text("登录");
         } else {
           $(this).addClass("form-login");
-          $(".login-form form").attr("action", "/login");
+          $(".login-form form").attr("action", "/data/login");
           $(".login-title,.form-submit").text("登录");
           $(".no-account").text("没有账号？");
           $(this).text("注册");
         }
       });
 
+      $(".form-submit").click(function (){
+        $(".login-title,.form-submit").text("登录中...");
+        let email = $("input[type=email]").val()
+        let password = $("input[type=password]").val()
+        console.log(email,password)
+        $.ajax({
+          url:"/data/login",
+          type:"post",
+          data:{
+            email:email,
+            password:password
+          },
+          success:function (data){
+            let ret = JSON.parse(data);
+            console.log(data)
+            if (ret.status === 1){
+              console.log(ret.data.username)
+              localStorage.setItem("username",ret.data.username)
+              window.location.href = "/"
+            } else if (ret.status === 0){
+              $(".login-title,.form-submit").text("登录");
+              alert("登录失败")
+            } else {
+              $(".login-title,.form-submit").text("登录");
+              alert("登录失败")
+            }
+          }
+        })
+      })
+
     })
 
-    function form_check_(){
-        var email = $("input[name='email']").val();
-        var password = $("input[name='password']").val();
-        if(email == ""){
-          alert("邮箱不能为空");
-          return false;
-        }
-        if(password == ""){
-          alert("密码不能为空");
-          return false;
-        }
-        if(password.length < 6){
-          alert("密码长度不能小于6位");
-          return false;
-        }
-        if(email.indexOf("@") == -1){
-          alert("邮箱格式不正确，需包含 @");
-          return false;
-        }
-        if(email.indexOf(".") == -1){
-          alert("邮箱格式不正确，需包含 .");
-          return false;
-        }
-        return true;
-
-      }
   </script>
 </head>
 
@@ -307,10 +312,12 @@
       <div class="login-header">
         <img src="" alt="">
         <h2 class="login-title">登录</h2>
+<%--        <c:if test="${not empty requestScope.loginError}">--%>
+<%--          <div class="error">${requestScope.loginError}</div>--%>
+<%--        </c:if>--%>
       </div>
       <div class="login-form">
-        <form action="login" method="post" onsubmit="return form_check()">
-
+        <form>
           <div class="form-group input-username" style="display:none">
             <div class="form-text-little">用户</div>
             <label class="form-label" for="username">
@@ -338,7 +345,7 @@
             </label>
           </div>
 
-          <div class="form-group submit-wrap"><button class="form-submit" type="submit">登录</button></div>
+          <div class="form-group submit-wrap"><button class="form-submit" type="button">登录</button></div>
 
           <div class="switch-div reg-show">
             <div class="form-text-little no-account">没有账号？</div><a class="form-text-little form-style form-login">注册</a>

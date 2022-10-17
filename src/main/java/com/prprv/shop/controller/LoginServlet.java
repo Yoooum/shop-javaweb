@@ -1,9 +1,9 @@
 package com.prprv.shop.controller;
 
 
-import com.prprv.shop.dao.impl.GoodsInfoDaoImpl;
-import com.prprv.shop.pojo_old.GoodsInfo;
-import com.prprv.shop.pojo_old.UserInfo;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONWriter;
+import com.prprv.shop.pojo.User;
 import com.prprv.shop.service.Login;
 import com.prprv.shop.service.impl.LoginImpl;
 
@@ -14,23 +14,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.io.Serial;
-import java.util.List;
+import java.util.Map;
 
 
 /**
  * @author 未確認の庭師
  */
-@WebServlet(name = "LoginServlet", urlPatterns = "/login")
+@WebServlet(name = "LoginServlet", urlPatterns = "/data/login")
 public class LoginServlet extends HttpServlet {
-
     @Serial
     private static final long serialVersionUID = 1L;
-
-    @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher("login.jsp").forward(req, resp);
-    }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException, ServletException {
@@ -39,25 +34,17 @@ public class LoginServlet extends HttpServlet {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/html;charset=UTF-8");
 
-        //调用请求对象
         String email = req.getParameter("email");
         String password = req.getParameter("password");
+        System.out.println(email + " " + password);
 
         Login login = new LoginImpl();
-        if (login.hasUser(email, password)) {
-            HttpSession session = req.getSession();
-            UserInfo userInfo = login.getUserInfo(email);
-            session.setAttribute("username", userInfo.getName());
-            session.setAttribute("email", userInfo.getEmail());
-            session.setAttribute("uid", userInfo.getUid());
-            List<GoodsInfo> list = new GoodsInfoDaoImpl().getGoodsInfoList();
-            req.setAttribute("goodsList",list);
-            req.getRequestDispatcher("index.jsp").forward(req,resp);
-            //resp.sendRedirect("/");
+        PrintWriter out = resp.getWriter();
+        if (login.isLogin(email, password)) {
+            User user = login.getUserByEmail(email);
+            out.print(JSON.toJSONString(Map.of("status", 1, "data", user)));
         } else {
-            req.getRequestDispatcher("/login.jsp").forward(req, resp);
-            //resp.setHeader("Location","/login");
-            //resp.sendRedirect("/login.jsp");
+            out.print("{status:0}");
         }
 
     }

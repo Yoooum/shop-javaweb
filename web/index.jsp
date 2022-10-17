@@ -12,7 +12,7 @@
 
     <link rel='canonical' href='https://prprv.com/'>
 
-    <link rel="stylesheet" href="/css/style.base.css">
+    <link rel="stylesheet" href="css/style.base.css">
     <meta property='og:title' content='未確認の庭師'>
     <meta property='og:description' content='Prprprprprprprpr---!'>
     <meta property='og:url' content='https://prprv.com/'>
@@ -24,6 +24,46 @@
     <link rel="alternate" type="application/rss&#43;xml" href="https://prprv.com/index.xml">
     <link rel="shortcut icon" href="/favicon.ico"/>
     <link rel="shortcut icon" href="/favicon.ico"/>
+    <style>
+        .book-list div ul{
+            list-style: none;
+            display: flex;
+            flex-wrap: wrap;
+            padding: 0;
+        }
+        .book-list div ul li {
+            list-style: none;
+            width: 130px;
+            margin: 20px;
+            /*height: 300px;*/
+            /*border-radius: 10px;*/
+            /*background-color: #fff;*/
+            /*box-shadow: 0 0 10px #ccc;*/
+        }
+        .book-list div ul li img {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            background-color: #fff;
+            box-shadow: 0 0 10px #ccc;
+            margin-bottom: 10px;
+        }
+        .book-list div ul li > a {
+            font-size: 16px;
+            font-weight: bold;
+        }
+        .book-cart-add a{
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .book-cart-add{
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 100%;
+            height: 50px;
+        }
+    </style>
 </head>
 
 <body class="">
@@ -44,14 +84,34 @@
 </script>
 <script>
     $(document).ready(function () {
-        $('.site-name').click(function () {
-            let username = sessionStorage.getItem('username')
-            if (!username) {
-                window.location.href = 'login.jsp'
-            } else {
-                $(this).children('a').text(username)
-            }
+        let showName = $('.site-name').children('a')
+        if (localStorage.getItem('username') == null) {
+            showName.text('登录').attr('href', '/login')
+        } else {
+            showName.text(localStorage.getItem('username'))
+        }
+
+        //
+        for (let i = 0; i < 12; i++) {
+            let book = $('.book-list-ul li:eq(0)').clone(true)
+            $('.book-list-ul').append(book)
+        }
+        $('.book-list-ul li').each(function (index, element) {
+            $(element).children('a').text('书名' + index)
+            $(element).find('.goods-id').text(index)
+            $(element).children('img').attr('src', 'img/book/s33956867.jpg')
         })
+
+        //购物车物品ID列表
+        let bookList = []
+        $('.book-cart-add svg').click(function () {
+            let bookID = $(this).prev('.goods-id').text()
+            bookList.push(bookID)
+            console.log(bookList)
+        })
+
+
+
     })
 </script>
 
@@ -74,11 +134,7 @@
             </figure>
             <div class="site-meta">
                 <h1 class="site-name">
-                    <% if(session.getAttribute("username") == null) {
-                        out.print("<a style=\"cursor: pointer\" href='login'>登录</a>");
-                    } else {
-                        out.print("<a>" + session.getAttribute("username") + "</a>");
-                    } %>
+                    <a>登录</a>
                 </h1>
                 <h2 class="site-description">Shop Demo</h2>
             </div>
@@ -185,14 +241,22 @@
 
 
     <main class="main full-width">
-        <section class="article-list">
-            <%=request.getAttribute("goodsList")%>
-            <c:forEach items="${requestScope.goodsList}" var="glist">
-                <tr>
-                    <td>${glist.gid}</td>
-                    <td>${glist.name}</td>
-                </tr>
-            </c:forEach>
+        <section class="book-list">
+            <div>
+                <ul class="book-list-ul">
+                    <li>
+                        <img src="img/book/s33956867.jpg" alt="">
+                        <a>置身事内</a>
+                        <div class="book-cart-add">
+                            <a>¥20.00</a>
+                            <a>
+                                <span class="goods-id" style="display: none">23</span>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-plus-circle"><circle cx="12" cy="12" r="10"></circle><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+                            </a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
         </section>
         <nav class='pagination'>
             <span class='page-link current'>1</span>

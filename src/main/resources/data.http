@@ -1,0 +1,5 @@
+POST http://localhost:8080/data/login
+Accept: application/json
+Content-Type: application/x-www-form-urlencoded
+
+email=test@p.p&password=123456
