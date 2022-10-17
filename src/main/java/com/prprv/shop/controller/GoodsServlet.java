@@ -20,7 +20,7 @@ import java.io.PrintWriter;
 @WebServlet(name = "GoodsServlet", urlPatterns = "/data/goods")
 public class GoodsServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/javascript;charset=UTF-8");
         req.getParameter("goods_list");

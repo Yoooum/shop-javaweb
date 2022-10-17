@@ -98,12 +98,12 @@
             showName.text(localStorage.getItem('username'))
         }
 
-        let bookAllList = []
+
         $.ajax({
             url: "/data/goods?goods_list=all",
             type: "get",
             success: function (data){
-                bookAllList = JSON.parse(data)
+                let bookAllList = JSON.parse(data)
                 for(let book in bookAllList){
                     console.log(bookAllList[book])
                     let book_li = $('.book-list-ul li:eq(0)').clone(true)
@@ -118,12 +118,6 @@
             }
 
         })
-
-        // $('.book-list-ul li').each(function (index, element) {
-        //     $(element).children('a').text('书名' + index)
-        //     $(element).find('.goods-id').text(index)
-        //     $(element).children('img').attr('src', 'https://img1.doubanio.com/view/subject/l/public/s33956867.jpg')
-        // })
 
         //购物车物品ID列表
         let bookList = []
