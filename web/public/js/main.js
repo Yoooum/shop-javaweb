@@ -14,7 +14,7 @@ $(document).ready(function () {
             let bookAllList = JSON.parse(data)
             for(let book in bookAllList){
                 console.log(bookAllList[book])
-                let book_li = $('.book-list-ul li:eq(0)').clone(true)
+                let book_li = $('.component-all .component-goods-li').clone(true)
                 $('.book-list-ul').append(book_li)
             }
             $('.book-list-ul li').each(function (index, element) {
