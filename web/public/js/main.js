@@ -28,15 +28,14 @@ $(document).ready(function () {
     })
 
     $.ajax({
-        url: "http://127.0.0.1:8080/data?classify_list=all",
+        url: "http://127.0.0.1:8080/api/?data=classify",
         type: "get",
-        success: function (data){
-            let bookAllList = JSON.parse(data)
-            for(let book in bookAllList){
-                console.log('第二次ajax')
-                
+        success:function (data){
+            var bookClassify = JSON.parse(data);
+            for (let i in bookClassify){
+                console.log(bookClassify[i]);
+                $(".tagCloud-tags").append("<a>"+bookClassify[i]+"</a>");
             }
-            
         }
 
     })
