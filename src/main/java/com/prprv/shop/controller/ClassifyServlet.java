@@ -1,7 +1,6 @@
 package com.prprv.shop.controller;
 
 import com.alibaba.fastjson2.JSON;
-import com.alibaba.fastjson2.annotation.JSONType;
 import com.prprv.shop.mapper.GoodsMapper;
 import com.prprv.shop.util.SqlSessionUtil;
 import org.apache.ibatis.session.SqlSession;
@@ -17,16 +16,16 @@ import java.io.PrintWriter;
 /**
  * @author 未確認の庭師
  */
-@WebServlet(name = "GoodsServlet", urlPatterns = "/data/goods")
-public class GoodsServlet extends HttpServlet {
+@WebServlet(urlPatterns = "/data/classify")
+public class ClassifyServlet extends HttpServlet {
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setHeader("Access-Control-Allow-Origin", "*");
         req.setCharacterEncoding("UTF-8");
         resp.setContentType("text/javascript;charset=UTF-8");
-        req.getParameter("goods_list");
+        req.getParameter("classify_list");
         PrintWriter out = resp.getWriter();
-        if(req.getParameter("goods_list").equals("all")){
+        if(req.getParameter("classify_list").equals("all")){
             //查所有商品
             SqlSession sqlSession = SqlSessionUtil.getSession();
             GoodsMapper goodsMapper = sqlSession.getMapper(GoodsMapper.class);
