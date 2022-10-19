@@ -51,11 +51,13 @@ $(document).ready(function () {
 
     //购物车物品ID列表
     let bookList = []
-    $('.book-cart-add svg').click(function () {
-        let bookID = $(this).prev('.goods-id').text()
-        bookList.push(bookID)
+    $(document).on('click', '.book-cart-add svg', function () {
+        let bookId = $(this).parent().parent().find('.goods-id').text()
+        bookList.push(bookId)
         console.log(bookList)
+        $('.cart-num').text('购物车('+bookList.length+')')
     })
+    
 
 
 
