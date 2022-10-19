@@ -191,9 +191,29 @@ function goodsDelete() {
 
 
 function autoView() {
+    $('#main-menu li').removeClass('current');
+    if(location.hash == "#index"){
+        $('#main-menu li:eq(0)').addClass('current');
+    }
     if(location.hash == "#goods"){
+        $('#main-menu li:eq(1)').addClass('current');
         $('.goodsUpdate').show();
     } else {
         $('.goodsUpdate').hide();
     }
+    if(location.hash == "#orders"){
+        $('#main-menu li:eq(2)').addClass('current');
+    }
+    if(location.hash == "#users"){
+        $('#main-menu li:eq(3)').addClass('current');
+    }
+    if(location.hash == "#user"){
+        $('#main-menu li:eq(4)').addClass('current');
+    }
+    if(location.hash == "#cart"){
+        $('#main-menu li:eq(5)').addClass('current');
+    }
+
+
+    
 }
