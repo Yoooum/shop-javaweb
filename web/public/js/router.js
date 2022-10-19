@@ -10,6 +10,8 @@ function Router(routes, defaultRoute) {
 
     //绑定 hashchange 事件
     window.addEventListener("hashchange", function() {
+        //路由改变时，执行autoView();
+        autoView();
         let route = location.hash.slice(1) || "";
         onThis.oldRoute = onThis.currentRoute;
         onThis.currentRoute = route;

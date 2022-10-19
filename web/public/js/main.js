@@ -1,6 +1,10 @@
 $(document).ready(function () {
  
-
+    if(location.hash == "#goods"){
+        $('.goodsUpdate').show();
+    } else {
+        $('.goodsUpdate').hide();
+    }
 
 
     let showName = $('.site-name').children('a')
@@ -184,3 +188,12 @@ function goodsDelete() {
         }
     })
 }  
+
+
+function autoView() {
+    if(location.hash == "#goods"){
+        $('.goodsUpdate').show();
+    } else {
+        $('.goodsUpdate').hide();
+    }
+}
