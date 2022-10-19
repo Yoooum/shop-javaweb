@@ -1,4 +1,8 @@
 $(document).ready(function () {
+ 
+
+
+
     let showName = $('.site-name').children('a')
     if (localStorage.getItem('username') == null) {
         showName.text('登录').attr('href', '/login')
@@ -51,4 +55,132 @@ $(document).ready(function () {
 
 
 
+
+
 })
+
+$(document).ready(function () {
+    
+
+
+    let showName = $('.site-name').children('a')
+    if (localStorage.getItem('username') == null) {
+        showName.text('登录').attr('href', '/login.html')
+    } else {
+        showName.text(localStorage.getItem('username'))
+    }
+})
+
+
+
+function goodsUpdate() {
+
+    let widget = $('.widget-goodsUpdate');
+    let goodsId = widget.attr('key');
+    let goodsName = widget.find('input[name=goodsName]').val();
+    let goodsPrice = widget.find('input[name=goodsPrice]').val();
+    let goodsNum = widget.find('input[name=goodsNum]').val();
+    let goodsImg = widget.find('input[name=goodsImg]').val();
+    let goodsClassify = widget.find('input[name=goodsClassify]').val();
+    let goodsIntro = widget.find('input[name=goodsIntro]').val();
+    let goodsBrief = widget.find('input[name=goodsBrief]').val();
+    let goods = {
+        "gid":goodsId,
+        "name": goodsName,
+        "price": parseFloat(goodsPrice),
+        "classify": goodsClassify,
+        "amount": parseInt(goodsNum),
+        "date": new Date(),
+        "img": goodsImg,
+        "brief": goodsBrief,
+        "intro": goodsIntro
+    };
+    
+    $.ajax({
+        url: "http://localhost:8080/api/?param=goods_update",
+        type: "post",
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        data: JSON.stringify(goods),
+        success: function (result) {
+            console.log(result);
+            if (result.status == "success") {
+                alert("修改成功")
+            } else {
+                alert("修改失败")
+            }
+        },
+        error: function (result) {
+            console.log(result.status)
+            alert("修改失败")
+        }
+    })
+}  
+
+function goodsAdd() {
+
+    let widget = $('.widget-goodsUpdate');
+    let goodsId = widget.attr('key');
+    let goodsName = widget.find('input[name=goodsName]').val();
+    let goodsPrice = widget.find('input[name=goodsPrice]').val();
+    let goodsNum = widget.find('input[name=goodsNum]').val();
+    let goodsImg = widget.find('input[name=goodsImg]').val();
+    let goodsClassify = widget.find('input[name=goodsClassify]').val();
+    let goodsIntro = widget.find('input[name=goodsIntro]').val();
+    let goodsBrief = widget.find('input[name=goodsBrief]').val();
+    let goods = {
+        "name": goodsName,
+        "price": parseFloat(goodsPrice),
+        "classify": goodsClassify,
+        "amount": parseInt(goodsNum),
+        "date": new Date(),
+        "img": goodsImg,
+        "brief": goodsBrief,
+        "intro": goodsIntro
+    };
+    
+    $.ajax({
+        url: "http://localhost:8080/api/?param=goods_add",
+        type: "post",
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        data: JSON.stringify(goods),
+        success: function (result) {
+            console.log(result);
+            if (result.status == "success") {
+                alert("添加成功")
+            } else {
+                alert("添加失败")
+            }
+        },
+        error: function (result) {
+            console.log(result.status)
+            alert("添加失败")
+        }
+    })
+}  
+
+function goodsDelete() {
+
+    let widget = $('.widget-goodsUpdate');
+    let goodsId = widget.attr('key');
+    
+    $.ajax({
+        url: "http://localhost:8080/api/?param=goods_delete&gid="+goodsId,
+        type: "get",
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function (result) {
+            console.log(result);
+            if (result.status == "success") {
+                alert("删除成功")
+            } else {
+                alert("删除失败")
+            }
+        },
+        error: function (result) {
+            console.log(result.status)
+            alert("删除失败")
+        }
+    })
+}  

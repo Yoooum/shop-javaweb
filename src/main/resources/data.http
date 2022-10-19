@@ -1,5 +1,26 @@
-POST http://localhost:8080/data/loginService
+### 登录
+POST http://localhost:8080/api/?param=login
 Accept: application/json
-Content-Type: application/x-www-form-urlencoded
+Content-Type: application/json
 
-email=test@p.p&password=123456
+{
+    "email": "测试@v.v",
+    "password": "123456"
+}
+
+### 注册
+POST http://localhost:8080/api/?param=register
+Accept: application/json
+Content-Type: application/json
+
+{
+    "username": "test",
+    "email": "测试@p.p",
+    "password": "123456"
+}
+
+### 所有商品
+GET http://localhost:8080/api/?param=goods_all
+
+### 所有分类
+GET http://localhost:8080/api/?param=classify_all

@@ -2,6 +2,7 @@ package com.prprv.shop.pojo;
 
 
 import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Goods {
 
@@ -10,7 +11,7 @@ public class Goods {
   private double price;
   private String classify;
   private Integer amount;
-  private LocalDateTime date;
+  private Date date;
   private String img;
   private Integer look;
   private String intro;
@@ -19,7 +20,7 @@ public class Goods {
   public Goods() {
   }
 
-  public Goods(Integer gid, String name, double price, String classify, Integer amount, LocalDateTime date, String img, Integer look, String intro, String brief) {
+  public Goods(Integer gid, String name, double price, String classify, Integer amount, Date date, String img, Integer look, String intro, String brief) {
     this.gid = gid;
     this.name = name;
     this.price = price;
@@ -72,11 +73,11 @@ public class Goods {
     this.amount = amount;
   }
 
-  public LocalDateTime getDate() {
+  public Date getDate() {
     return date;
   }
 
-  public void setDate(LocalDateTime date) {
+  public void setDate(Date date) {
     this.date = date;
   }
 

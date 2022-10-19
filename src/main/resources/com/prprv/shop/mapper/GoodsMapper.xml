@@ -5,7 +5,7 @@
 <mapper namespace="com.prprv.shop.mapper.GoodsMapper">
     <insert id="insertGoods" useGeneratedKeys="true" keyProperty="gid">
         insert into info_goods
-        values (null,#{name},#{price},#{classify},#{amount},#{date},#{img},#{look},#{intro},#{brief})
+        values (null,#{name},#{price},#{classify},#{amount},#{date},#{img},0,#{intro},#{brief})
     </insert>
     <select id="selectAllClassify" resultType="String">
         select classify from info_goods group by classify
@@ -17,7 +17,7 @@
     <update id="updateGoods">
         update info_goods set
             name=#{name},price=#{price},classify=#{classify},amount=#{amount},
-            date=#{date},img=#{img},look=#{look},intro=#{intro},brief=#{brief}
+            date=#{date},img=#{img},intro=#{intro},brief=#{brief}
         where gid=#{gid}
     </update>
 
