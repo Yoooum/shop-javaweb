@@ -9,11 +9,6 @@
 package com.prprv.shop.controller;
 
 import com.alibaba.fastjson2.JSON;
-import com.phj233.impl.IsLoginImpl;
-import com.phj233.mybatis.mappers.UserMapper;
-import com.phj233.pojo.User;
-import com.phj233.service.IsLogin;
-import com.phj233.util.SqlSessionUtil;
 import com.prprv.shop.mapper.UserMapper;
 import com.prprv.shop.pojo.User;
 import com.prprv.shop.service.LoginService;

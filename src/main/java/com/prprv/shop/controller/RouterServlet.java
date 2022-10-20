@@ -3,6 +3,7 @@ package com.prprv.shop.controller;
 import com.alibaba.fastjson2.JSON;
 import com.alibaba.fastjson2.JSONObject;
 import com.prprv.shop.mapper.GoodsMapper;
+import com.prprv.shop.mapper.UserMapper;
 import com.prprv.shop.pojo.Goods;
 import com.prprv.shop.pojo.User;
 import com.prprv.shop.service.LoginService;
@@ -47,8 +48,28 @@ public class RouterServlet extends HttpServlet {
             case "goods_add": goodsAdd(req, resp);break;
             case "goods_delete": goodsDelete(req, resp);break;
             case "goods_update": goodsUpdate(req, resp);break;
+            case "user_update": userUpdate(req,resp);break;
             default: resp.sendError(404);
         }
+    }
+
+    private void userUpdate(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        JSONObject json = httpJsonRequest(req);
+        System.out.println(json);
+        User user = new User();
+        user.setUid(json.getInteger("uid"));
+        user.setEmail(json.getString("email"));
+        user.setUsername(json.getString("username"));
+        user.setPassword(json.getString("password"));
+        user.setAdmin(json.getBoolean("admin"));
+        SqlSession sqlSession = SqlSessionUtil.getSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        userMapper.updateUser(user);
+        PrintWriter out = resp.getWriter();
+        Map<String,Object>  map = new HashMap<>();
+        map.put("status", "success");
+        map.put("msg", "修改成功");
+        out.write(JSON.toJSONString(map));
     }
 
     private void goodsUpdate(HttpServletRequest req, HttpServletResponse resp) throws IOException {

@@ -2,86 +2,37 @@
 <script src="/js/jquery-3.6.1.min.js"></script>
 <script>
     $(document).ready(function () {
-        let user = sessionStorage.getItem('username');
-        let passwd= sessionStorage.getItem('passwd');
-        $.ajax({
-            url: "./data/login",
-            type: "post",
-            dataType: "json",
-            data:{
-                "name":user,
-                "passwd":passwd
-            },
-            success: function (data){
-                console.log(data);
-                if (data!=null){
-                    $("#uid").text(data.data.id);
-                    $("#username").text(data.data.username);
-                    $("#email").text(data.data.email);
-                    $("#admin").text(data.data.admin);
-                    $("td").css({
-                        "border":"#6f86d6 1px solid",
-                        "border-radius":"5px"
-                    })
-                }
-            }
-        })
+
+        $("#userUpdateDiv input[name=updateName]").val(sessionStorage.getItem("username"))
+        $("#userUpdateDiv input[name=updateEmail]").val(sessionStorage.getItem("email"))
+        $("#userUpdateDiv input[name=updatePassword]").val(sessionStorage.getItem("password"))
+
     })
     function updateUserInfo() {
-        let uid=sessionStorage.getItem("uid");
-        let username = sessionStorage.getItem('username');
-        let email = sessionStorage.getItem("email");
-        let passwd = sessionStorage.getItem('passwd');
-        let admin = sessionStorage.getItem("admin");
-        let newName = $("input[name='name']").val();
-        if (newName==="") newName=username;
-        let newEmail = $("input[name='email']").val();
-        if (newEmail==="") newEmail=email;
-        let newPasswd = $("input[name='passwd']").val();
-        if (newPasswd==="") newPasswd=passwd;
+        let uid = sessionStorage.getItem("uid")
+        let user = {
+            uid: parseInt(uid),
+            email: $("#userUpdateDiv input[name=updateEmail]").val(),
+            username: $("#userUpdateDiv input[name=updateName]").val(),
+            password: $("#userUpdateDiv input[name=updatePassword]").val(),
+            is_admin: true
+        }
         $.ajax({
             type: "post",
             dataType: "json",
-            url: "./update",
-            data: {
-                "user":username,
-                "passwd":passwd,
-                "uid":uid,
-                "admin":admin,
-                "newName":newName,
-                "newEmail":newEmail,
-                "newPasswd":newPasswd
-            },
+            contentType: "application/json;charset=utf-8",
+            url: "http://127.0.0.1:8080/api/?param=user_update",
+            data: JSON.stringify(user),
             success:function (data){
-                if (data!=null){
-                    $("#uid").text(data.id);
-                    $("#username").text(data.username);
-                    $("#email").text(data.email);
-                    $("#admin").text(data.admin);
-                }
+                console.log(data)
             }
         })
     }
 </script>
-<div style="height: 350px;background-color: white;border-radius: 10px;margin-top: 20px">
-    <table style="border-collapse: collapse;margin-left: 30px;margin-top: 20px">
-        <tr>
-            <th>UID</th>
-            <th>USERNAME</th>
-            <th>EMAIl</th>
-            <th>ADMIN</th>
-        </tr>
-        <tr >
-            <td id="uid">无</td>
-            <td id="username">无</td>
-            <td id="email">无</td>
-            <td id="admin">无</td>
-        </tr>
-    </table>
-</div>
-<div>
-    <input type="text" name="name" placeholder="用户名">
-    <input type="text" name="email" placeholder="邮箱">
-    <input type="text" name="passwd" placeholder="密码">
-    <button type="submit" onclick="updateUserInfo()">修改</button>
+
+<div id="userUpdateDiv">
+    <input type="text" name="updateName" placeholder="用户名">
+    <input type="text" name="updateEmail" placeholder="邮箱">
+    <input type="text" name="updatePassword" placeholder="密码">
+    <button onclick="updateUserInfo()">修改</button>
 </div>

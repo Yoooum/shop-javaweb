@@ -286,14 +286,14 @@
         }
 
         let param = $(".login-form form").attr("do");
-        if(param=="login"){
+        if(param==="login"){
           $(".login-title").text("登录中...");
-        } else if(param=="register"){
+        } else if(param==="register"){
           $(".login-title").text("注册中...");
-        } else if(param=="forget"){
+        } else if(param==="forget"){
           $(".login-title").text("发送中...");
         }
-        let data = param == "login" ? login : register;
+        let data = param === "login" ? login : register;
         $.ajax({
           url:"http://localhost:8080/api/?param=" + param,
           type: "post",
@@ -302,10 +302,15 @@
           data:JSON.stringify(data),
           success:function (ret){
             console.log(ret)
-            if(param=="login"){
+            if(param==="login"){
               if (ret.status === "success"){
                 console.log(ret.data.username)
+                sessionStorage.setItem("uid",ret.data.uid)
+                sessionStorage.setItem("username",ret.data.username)
                 localStorage.setItem("username",ret.data.username)
+                sessionStorage.setItem("email",ret.data.email)
+                sessionStorage.setItem("password",ret.data.password)
+                sessionStorage.setItem("admin",ret.data.admin)
                 window.location.href = "/"
               } else if (ret.status === 0){
                 $(".login-title").text("登录");

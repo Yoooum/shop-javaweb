@@ -2,12 +2,16 @@ $(document).ready(function () {
  
     autoView();
     
-
+    $(document).on('click','.logout',function(){
+        console.log("已退出");
+        localStorage.clear()
+        sessionStorage.clear()
+    })
     let showName = $('.site-name').children('a')
-    if (localStorage.getItem('username') == null) {
-        showName.text('登录').attr('href', '/login')
-    } else {
+    if (localStorage.getItem('username') != null) {
         showName.text(localStorage.getItem('username'))
+    } else {
+        showName.text('登录').attr('href', '/login')
     }
 
 
@@ -189,6 +193,8 @@ function goodsDelete() {
 
 
 function autoView() {
+    
+
     $('#main-menu li').removeClass('current');
     if(location.hash == "#index"){
         $('#main-menu li:eq(0)').addClass('current');
