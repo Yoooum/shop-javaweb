@@ -236,14 +236,14 @@
         $(".input-password .form-label").slideToggle("fast");
         $(".reg-show").toggle();
         if ($(this).hasClass("now-forget")) {
-          $(".login-form form").attr("action", "/data/login");
+          $(".login-form form").attr("do", "login");
           $(this).removeClass("now-forget");
           $(this).text("忘记密码？");
           $(".forget-text").text("密码");
           $(".form-submit,.login-title").text("登录");
         } else {
           $(this).addClass("now-forget");
-          $(".login-form form").attr("action", "/data/forget");
+          $(".login-form form").attr("do", "forget");
           $(this).text("返回登录？");
           $(".forget-text").text("重置链接将发送到邮箱");
           $(".form-submit").text("发送");
@@ -256,13 +256,13 @@
         $(".pwd-forget").toggle();
         if ($(this).hasClass("form-login")) {
           $(this).removeClass("form-login");
-          $(".login-form form").attr("action", "/data/register");
+          $(".login-form form").attr("do", "register");
           $(".login-title,.form-submit").text("注册");
           $(".no-account").text("已有账号？");
           $(this).text("登录");
         } else {
           $(this).addClass("form-login");
-          $(".login-form form").attr("action", "/data/login");
+          $(".login-form form").attr("do", "login");
           $(".login-title,.form-submit").text("登录");
           $(".no-account").text("没有账号？");
           $(this).text("注册");
@@ -270,33 +270,60 @@
       });
 
       $(".form-submit").click(function (){
-        $(".login-title,.form-submit").text("登录中...");
+        $(".login-title").text("登录中...");
+        let username = $("input[type=text]").val();
         let email = $("input[type=email]").val()
         let password = $("input[type=password]").val()
-        console.log(email,password)
-        let user = {
+        console.log(username,email,password)
+        let login = {
           "email": email,
           "password": password
         }
+        let register = {
+          "username": username,
+          "email": email,
+          "password": password
+        }
+
+        let param = $(".login-form form").attr("do");
+        if(param=="login"){
+          $(".login-title").text("登录中...");
+        } else if(param=="register"){
+          $(".login-title").text("注册中...");
+        } else if(param=="forget"){
+          $(".login-title").text("发送中...");
+        }
+        let data = param == "login" ? login : register;
         $.ajax({
-          url:"http://localhost:8080/api/?param=login",
+          url:"http://localhost:8080/api/?param=" + param,
           type: "post",
           dataType: "json",
           contentType: "application/json;charset=utf-8",
-          data:JSON.stringify(user),
+          data:JSON.stringify(data),
           success:function (ret){
             console.log(ret)
+            if(param=="login"){
+              if (ret.status === "success"){
+                console.log(ret.data.username)
+                localStorage.setItem("username",ret.data.username)
+                window.location.href = "/"
+              } else if (ret.status === 0){
+                $(".login-title").text("登录");
+                alert("登录失败")
+              } else {
+                $(".login-title").text("登录");
+                alert("登录失败")
+              }
+          } else{
             if (ret.status === "success"){
-              console.log(ret.data.username)
-              localStorage.setItem("username",ret.data.username)
-              window.location.href = "/"
-            } else if (ret.status === 0){
-              $(".login-title,.form-submit").text("登录");
-              alert("登录失败")
+              $(".login-form form").attr("do", "login");
+              $(".login-title,.form-submit").text("注册成功，登录");
+            } else if (ret.status === "fail"){
+              $(".login-title").text("注册失败");
             } else {
-              $(".login-title,.form-submit").text("登录");
-              alert("登录失败")
+              $(".login-title").text("登录");
             }
+          }
           }
         })
       })
@@ -314,7 +341,7 @@
         <h2 class="login-title">登录</h2>
       </div>
       <div class="login-form">
-        <form>
+        <form do="login">
           <div class="form-group input-username" style="display:none">
             <div class="form-text-little">用户</div>
             <label class="form-label" for="username">
