@@ -1,5 +1,5 @@
 
-#table-goods{
+#table-goods,#table-users{
     font-size: 1.4rem;
     width: 100%;
     /* border-collapse: collapse; */
@@ -10,15 +10,14 @@
     border-radius: 10px;
     box-shadow: 0 0 5px #ccc;;
 }
-#table-goods tr{
+#table-goods tr,#table-users tr{
     border-bottom: 1px solid #ccc;
-    
     /* text-align: center; */
 }
-#table-goods tr:last-child{
+#table-goods tr:last-child,#table-users tr:last-child{
     border-bottom: none;
 }
-#table-goods tr th{
+#table-goods tr th,#table-users tr th{
     /* font-size: 1.4rem; */
     color: #34495E;
     /* border: 1px solid #ccc; */
@@ -29,10 +28,12 @@
     text-align: center;    
 }
 #table-goods tr td:first-child,
-#table-goods tr th:first-child{
+#table-goods tr th:first-child,
+#table-users tr td:first-child,
+#table-users tr th:first-child{
     border-left: none;
 }
-#table-goods tr td{
+#table-goods tr td,#table-users tr td{
     /* border: 1px solid #ccc; */
     border-left: 1px solid #ccc;
     border-top: 1px solid #ccc;
@@ -40,16 +41,16 @@
     text-align: center;
 }
 
-#table-goods tr td[key=name]{
+#table-goods tr td[key=name],#table-users tr td[key=name]{
     text-align: left;
 }
 
-.widget-goodsUpdate{
+.widget-goodsUpdate,.widget-usersUpdate{
     display: flex;
     flex-direction: column;
 }
 
-.goods-update-btn{
+.goods-update-btn,.users-update-btn{
     /* font-size: 1.4rem; */
     margin: 5px 0;
     border: #ccc;

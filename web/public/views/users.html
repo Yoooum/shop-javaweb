@@ -1,1 +1,70 @@
-<h1>users</h1>
+<div>
+    <style>
+    </style>
+    <script>
+        $(document).on('click','.users-update-btn',function(){
+            let users = {};
+            $(this).parents('tr').children('td').each(function(){
+                users[$(this).attr('key')] = $(this).text();
+            });
+
+            $('.widget-usersUpdate').attr('key',users.uid);
+            $('.widget-usersUpdate').children('label').each(function(){
+                $(this).children('input[key=uid]').val(users.uid);
+                $(this).children('input[key=username]').val(users.username);
+                $(this).children('input[key=email]').val(users.email);
+                $(this).children('input[key=password]').val(users.password);
+                $(this).children('input[key=admin]').val(users.admin);
+            });
+        })
+
+        $.ajax({
+            url: 'http://127.0.0.1:8080/api/?param=users_all',
+            type: 'get',
+            dataType: 'json',
+            success: function(ret){
+                if(ret.status === 'success'){
+                    let users = ret.data;
+                    let html = '';
+                    for(let i = 0; i < users.length; i++){
+                        html += '<tr>';
+                        html += '<td key="uid">' + users[i].uid + '</td>';
+                        html += '<td key="username">' + users[i].username + '</td>';
+                        html += '<td key="email">' + users[i].email + '</td>';
+                        html += '<td key="password">' + users[i].password + '</td>';
+                        html += '<td key="admin">' + users[i].admin + '</td>';   
+                        html += '<td key="update"><button class="users-update-btn">修改</button></td>';
+                        html += '</tr>';
+                    }
+                    $('#table-users').append(html);
+                }
+            }
+        })
+    </script>
+    <table id="table-users" class="table-users">
+        <tr>
+            <th>UID</th>
+            <th>USER</th>
+            <th>EMAIL</th>
+            <th>PASSWORD</th>
+            <th>ADMIN</th>
+        </tr>
+        
+        <!-- <tr class="table-users-data">
+            <td key="gid">123</td>
+            <td key="name">名字</td>
+            <td key="price">132</td>
+            <td key="classify">无分类</td>
+            <td key="amount">6546</td>
+            <td key="look">77</td>
+            <td key="date">2022-10-18</td>
+            <td key="img">URL</td>
+            <td key="intro">介绍</td>
+            <td key="brief">简介</td>
+            <td key="update"><button class="users-update-btn">修改</button></td>
+        </tr> -->
+
+    
+    </table>
+
+</div>
