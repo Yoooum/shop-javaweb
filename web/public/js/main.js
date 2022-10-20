@@ -66,9 +66,6 @@ $(document).ready(function () {
 })
 
 $(document).ready(function () {
-    
-
-
     let showName = $('.site-name').children('a')
     if (localStorage.getItem('username') == null) {
         showName.text('登录').attr('href', '/login.html')
@@ -190,6 +187,103 @@ function goodsDelete() {
         }
     })
 }  
+function usersUpdate() {
+
+    let widget = $('.widget-usersUpdate');
+    let usersId = widget.attr('key');
+    let usersName = widget.find('input[name=usersUsername]').val();
+    let usersEmail = widget.find('input[name=usersEmail]').val();
+    let usersPasswd = widget.find('input[name=usersPasswd]').val();
+    let usersAdmin = widget.find('input[name=usersAdmin]').val();
+    let users = {
+        "uid":usersId,
+        "username": usersName,
+        "password": usersPasswd,
+        "email": usersEmail,
+        "admin": usersAdmin
+    };
+    
+    $.ajax({
+        url: "http://localhost:8080/api/?param=users_update",
+        type: "post",
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        data: JSON.stringify(users),
+        success: function (result) {
+            console.log(result);
+            if (result.status == "success") {
+                alert("修改成功")
+            } else {
+                alert("修改失败")
+            }
+        },
+        error: function (result) {
+            console.log(result.status)
+            alert("修改失败")
+        }
+    })
+}  
+
+function usersAdd() {
+
+    let widget = $('.widget-usersUpdate');
+    let usersId = widget.attr('key');
+    let usersName = widget.find('input[name=usersUsername]').val();
+    let usersEmail = widget.find('input[name=usersEmail]').val();
+    let usersPasswd = widget.find('input[name=usersPasswd]').val();
+    let usersAdmin = widget.find('input[name=usersAdmin]').val();
+    let users = {
+        "name": usersName,
+        "password": usersPasswd,
+        "email": usersEmail,
+        "admin": usersAdmin
+    };
+    
+    $.ajax({
+        url: "http://localhost:8080/api/?param=users_add",
+        type: "post",
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        data: JSON.stringify(users),
+        success: function (result) {
+            console.log(result);
+            if (result.status == "success") {
+                alert("添加成功")
+            } else {
+                alert("添加失败")
+            }
+        },
+        error: function (result) {
+            console.log(result.status)
+            alert("添加失败")
+        }
+    })
+}  
+
+function usersDelete() {
+
+    let widget = $('.widget-usersUpdate');
+    let usersId = widget.attr('key');
+    
+    $.ajax({
+        url: "http://localhost:8080/api/?param=users_delete&uid="+usersId,
+        type: "get",
+        dataType: "json",
+        contentType: "application/json;charset=utf-8",
+        success: function (result) {
+            console.log(result);
+            if (result.status == "success") {
+                alert("删除成功")
+            } else {
+                alert("删除失败")
+            }
+        },
+        error: function (result) {
+            console.log(result.status)
+            alert("删除失败")
+        }
+    })
+}  
 
 
 function autoView() {
@@ -211,6 +305,9 @@ function autoView() {
     }
     if(location.hash == "#users"){
         $('#main-menu li:eq(3)').addClass('current');
+        $('.usersUpdate').show();
+    }else{
+        $('.usersUpdate').hide();
     }
     if(location.hash == "#user"){
         $('#main-menu li:eq(4)').addClass('current');

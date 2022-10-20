@@ -44,13 +44,67 @@ public class RouterServlet extends HttpServlet {
             case "login": login(req, resp);break;
             case "register": register(req, resp);break;
             case "goods_all": goodsAllList(req, resp);break;
+            case "users_all": userAllList(req,resp); break;
             case "classify_all": classifyAllList(req, resp);break;
             case "goods_add": goodsAdd(req, resp);break;
             case "goods_delete": goodsDelete(req, resp);break;
             case "goods_update": goodsUpdate(req, resp);break;
+            case "users_add": usersAdd(req, resp);break;
+            case "users_delete": usersDelete(req, resp);break;
             case "user_update": userUpdate(req,resp);break;
             default: resp.sendError(404);
         }
+    }
+
+    private void usersDelete(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        SqlSession sqlSession = SqlSessionUtil.getSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        int ret = userMapper.deleteUser(Integer.valueOf(req.getParameter("uid")));
+        Map<String, Object> map = new HashMap<>();
+        if(ret == 1){
+            map.put("status", "success");
+            map.put("msg", "删除成功");
+        } else {
+            map.put("status", "error");
+            map.put("msg", "删除失败");
+        }
+        PrintWriter out = resp.getWriter();
+        out.print(JSON.toJSONString(map));
+    }
+
+    private void usersAdd(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        JSONObject json = httpJsonRequest(req);
+        System.out.println(json);
+        SqlSession sqlSession = SqlSessionUtil.getSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        User user = new User();
+        user.setUsername(json.getString("name"));
+        user.setEmail(json.getString("email"));
+        user.setPassword(json.getString("password"));
+        user.setAdmin(json.getBoolean("admin"));
+        userMapper.insertUser(user);
+        Map<String, Object> map = new HashMap<>();
+        if(user.getUid() != null){
+            map.put("status", "success");
+            map.put("msg", "添加成功");
+        } else {
+            map.put("status", "error");
+            map.put("msg", "添加失败");
+        }
+        PrintWriter out = resp.getWriter();
+        out.print(JSON.toJSONString(map));
+    }
+
+    private void userAllList(HttpServletRequest req, HttpServletResponse resp) throws IOException {
+        PrintWriter out = resp.getWriter();
+        Map<String, Object> map = new HashMap<>();
+        //查所有用户
+        SqlSession sqlSession = SqlSessionUtil.getSession();
+        UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
+        map.put("status", "success");
+        map.put("data", userMapper.selectAllUser());
+        out.write(JSON.toJSONString(map));
+        sqlSession.close();
     }
 
     private void userUpdate(HttpServletRequest req, HttpServletResponse resp) throws IOException {
