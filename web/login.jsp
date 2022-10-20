@@ -288,7 +288,8 @@
             console.log(data)
             if (ret.status === 1){
               console.log(ret.data.username)
-              localStorage.setItem("username",ret.data.username)
+              sessionStorage.setItem("username",ret.data.username);
+              sessionStorage.setItem("passwd",ret.data.password);
               window.location.href = "/"
             } else if (ret.status === 0){
               $(".login-title,.form-submit").text("登录");
