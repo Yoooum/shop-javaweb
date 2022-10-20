@@ -1,11 +1,7 @@
 $(document).ready(function () {
  
-    if(location.hash == "#goods"){
-        $('.goodsUpdate').show();
-    } else {
-        $('.goodsUpdate').hide();
-    }
-
+    autoView();
+    
 
     let showName = $('.site-name').children('a')
     if (localStorage.getItem('username') == null) {
@@ -198,6 +194,7 @@ function autoView() {
         $('#main-menu li:eq(0)').addClass('current');
     }
     if(location.hash == "#goods"){
+        $('.tagCloud').hide();
         $('#main-menu li:eq(1)').addClass('current');
         $('.goodsUpdate').show();
     } else {

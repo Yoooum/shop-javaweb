@@ -206,54 +206,43 @@
             </section>
 
             <section class="widget goodsUpdate">
-                <div class="widget-icon">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-event" width="24"
-                        height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
-                        stroke-linecap="round" stroke-linejoin="round">
-                        <path stroke="none" d="M0 0h24v24H0z" />
-                        <rect x="4" y="5" width="16" height="16" rx="2" />
-                        <line x1="16" y1="3" x2="16" y2="7" />
-                        <line x1="8" y1="3" x2="8" y2="7" />
-                        <line x1="4" y1="11" x2="20" y2="11" />
-                        <rect x="8" y="15" width="2" height="2" />
-                    </svg>
-                </div>
-                <h2 class="widget-title section-title">更新</h2>
+                
+                <h2 class="widget-title section-title">操作</h2>
                 <div class="widget-goodsUpdate" gid="0">
 
-                    <label for="goodsName">书名
+                    <label for="goodsName"><span>书名</span>
                         <input type="text" key="name" name="goodsName" placeholder="书名">
                     </label>
                     
 
-                    <label for="goodsPrice">价格
+                    <label for="goodsPrice"><span>价格</span>
                         <input type="text" key="price" name="goodsPrice" placeholder="单价">
                     </label>
                     
                     
-                    <label for="goodsNum">数量
+                    <label for="goodsNum"><span>数量</span>
                         <input type="text" key="amount" name="goodsNum" placeholder="数量">
                     </label>
                     
                     
-                    <label for="goodsImg">图片
+                    <label for="goodsImg"><span>图片</span>
                         <input type="text" key="img" name="goodsImg" placeholder="地址">
                     </label>
                 
-                    <label for="goodsClassify">分类
+                    <label for="goodsClassify"><span>分类</span>
                         <input type="text" key="classify" name="goodsClassify" placeholder="分类">
                     </label>
                     
-                    <label for="goodsIntro">介绍
+                    <label for="goodsIntro"><span>介绍</span>
                         <input type="text" key="intro" name="goodsIntro" placeholder="介绍">
                     </label>
 
-                    <label for="goodsBrief">简介
+                    <label for="goodsBrief"><span>简介</span>
                         <input type="text" key="brief" name="goodsBrief" placeholder="简介">
                     </label>
                     
                     
-                    <button id="goodsUpdate" onclick="goodsUpdate()">更新</button>
+                    <button id="goodsUpdate" onclick="goodsUpdate()">修改</button>
                     <button id="goodsAdd" onclick="goodsAdd()">添加</button>
                     <button id="goodsDelete" onclick="goodsDelete()">删除</button>
                 </div>
