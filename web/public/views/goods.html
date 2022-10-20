@@ -1,1 +1,89 @@
-<h1>goods</h1>
+<div>
+    <style>
+        #table-goods tr td[key=classify],
+        #table-goods tr td[key=img],
+        #table-goods tr td[key=brief],
+        #table-goods tr td[key=intro],
+        #table-goods tr td[key=brief]{
+            display: none;
+        }
+    </style>
+    <script>
+        $(document).on('click','.goods-update-btn',function(){
+            let goods = {};
+            $(this).parents('tr').children('td').each(function(){
+                goods[$(this).attr('key')] = $(this).text();
+            });
+
+            $('.widget-goodsUpdate').attr('key',goods.gid);
+            $('.widget-goodsUpdate').children('label').each(function(){
+                $(this).children('input[key=name]').val(goods.name);
+                $(this).children('input[key=price]').val(goods.price);
+                $(this).children('input[key=amount]').val(goods.amount);
+                $(this).children('input[key=img]').val(goods.img);
+                $(this).children('input[key=classify]').val(goods.classify);
+                $(this).children('input[key=intro]').val(goods.intro);
+                $(this).children('input[key=brief]').val(goods.brief);
+            });
+        })
+
+        $.ajax({
+            url: 'http://127.0.0.1:8080/api/?param=goods_all',
+            type: 'get',
+            dataType: 'json',
+            success: function(ret){
+                if(ret.status === 'success'){
+                    let goods = ret.data;
+                    let html = '';
+                    for(let i = 0; i < goods.length; i++){
+                        html += '<tr>';
+                        html += '<td key="gid">' + goods[i].gid + '</td>';
+                        html += '<td key="name">' + goods[i].name + '</td>';
+                        html += '<td key="price">' + goods[i].price + '</td>';
+                        html += '<td key="classify">' + goods[i].classify + '</td>';
+                        html += '<td key="amount">' + goods[i].amount + '</td>';
+                        html += '<td key="look">' + goods[i].look + '</td>';
+                        let datetime = new Date(goods[i].date);
+                        let date = datetime.getFullYear() + '-' + (datetime.getMonth() + 1) + '-' + datetime.getDate();
+                        html += '<td key="date">' + date + '</td>';
+                        html += '<td key="img">' + goods[i].img + '</td>';
+                        html += '<td key="intro">' + goods[i].intro + '</td>';
+                        html += '<td key="brief">' + goods[i].brief + '</td>';    
+                        html += '<td key="update"><button class="goods-update-btn">修改</button></td>';
+                        html += '</tr>';
+                    }
+                    $('#table-goods').append(html);
+                }
+            }
+        })
+    </script>
+    <table id="table-goods" class="table-goods">
+        <tr>
+            <th>GID</th>
+            <th>书名</th>
+            <th>价格</th>
+            <!-- <th>分类</th> -->
+            <th>数量</th>
+            <th>流量</th>
+            <th>修改时间</th>
+            <th>操作</th>
+        </tr>
+        
+        <!-- <tr class="table-goods-data">
+            <td key="gid">123</td>
+            <td key="name">名字</td>
+            <td key="price">132</td>
+            <td key="classify">无分类</td>
+            <td key="amount">6546</td>
+            <td key="look">77</td>
+            <td key="date">2022-10-18</td>
+            <td key="img">URL</td>
+            <td key="intro">介绍</td>
+            <td key="brief">简介</td>
+            <td key="update"><button class="goods-update-btn">修改</button></td>
+        </tr> -->
+
+    
+    </table>
+
+</div>

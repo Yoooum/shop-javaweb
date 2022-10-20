@@ -9,7 +9,8 @@ db.url=your_url
 db.username=your_username
 db.password=your_password
 ```
-### 2. URL的配置
+
+### ~~2. URL的配置~~（前端页面在public目录，用vscode的Live Server运行）
 
 页面展示路径  
 http://localhost:8080/loginService
@@ -35,3 +36,4 @@ web.xml仅配置 .jsp 后缀映射
 @WebServlet(name = "LoginServlet", urlPatterns = "/data/loginService")
 ```
 好处是可以隐藏 .jsp 后缀
+

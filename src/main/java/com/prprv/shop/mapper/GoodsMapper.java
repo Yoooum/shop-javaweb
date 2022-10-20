@@ -12,7 +12,8 @@ public interface GoodsMapper {
     //新增商品，同时返回自增的主键 gid 到 goods 对象
     void insertGoods(Goods goods);
     //查询商品分类
-    List<Goods> selectAllClassify();    //通过 gid 删除商品
+    List<Goods> selectAllClassify();
+    //通过 gid 删除商品
     int deleteGoods(@Param("gid") Integer gid);
     //修改
     int updateGoods(Goods goods);

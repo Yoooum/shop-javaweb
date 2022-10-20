@@ -13,7 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.io.Serial;
 import java.util.Map;
 
 
@@ -22,8 +21,6 @@ import java.util.Map;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = "/data/login")
 public class LoginServlet extends HttpServlet {
-    @Serial
-    private static final long serialVersionUID = 1L;
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
@@ -45,7 +42,7 @@ public class LoginServlet extends HttpServlet {
         PrintWriter out = resp.getWriter();
         if (loginService.isLogin(email, password)) {
             User user = loginService.getUserByEmail(email);
-            out.print(JSON.toJSONString(Map.of("status", 1, "data", user)));
+//            out.print(JSON.toJSONString(Map.of("status", 1, "data", user)));
         } else {
             out.print("{status:0}");
         }

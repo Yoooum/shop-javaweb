@@ -42,3 +42,54 @@
     width: 100%;
     height: 50px;
 }
+
+.goodsUpdate{
+    display: flex;
+    flex-direction: column;
+    box-sizing: border-box;
+    border-radius: 10px;
+    /* background-color: #fff; */
+    /* box-shadow: 0 0 10px #ccc; */
+}
+
+.widget-goodsUpdate label{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    font-size: 1.4rem;
+    font-weight: bold;
+    margin: 5px 0;
+    color: #34495E;
+}
+.widget-goodsUpdate label span{
+    white-space: nowrap;
+    display: block;
+    text-align: center;
+    margin-right: 10px;
+}
+.widget-goodsUpdate label input{
+    font-size: 1.4rem;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+}
+
+.widget-goodsUpdate button{
+    font-size: 1.4rem;
+    padding: 5px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    outline: none;
+    width: 100%;
+    background-color: #fff;
+    color: #34495E;
+    font-weight: bold;
+    cursor: pointer;
+    margin-top: 10px;
+}
+.widget-goodsUpdate button:hover{
+    background-color: #34495E;
+    color: #fff;
+}
