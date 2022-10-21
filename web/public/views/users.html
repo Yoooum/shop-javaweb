@@ -10,7 +10,7 @@
 
             $('.widget-usersUpdate').attr('key',users.uid);
             $('.widget-usersUpdate').children('label').each(function(){
-                $(this).children('input[key=uid]').val(users.uid);
+                // $(this).children('input[key=uid]').val(users.uid);
                 $(this).children('input[key=username]').val(users.username);
                 $(this).children('input[key=email]').val(users.email);
                 $(this).children('input[key=password]').val(users.password);
@@ -44,10 +44,11 @@
     <table id="table-users" class="table-users">
         <tr>
             <th>UID</th>
-            <th>USER</th>
-            <th>EMAIL</th>
-            <th>PASSWORD</th>
-            <th>ADMIN</th>
+            <th>用户</th>
+            <th>邮箱</th>
+            <th>密码</th>
+            <th>权限</th>
+            <th>操作</th>
         </tr>
         
         <!-- <tr class="table-users-data">

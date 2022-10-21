@@ -3,7 +3,7 @@ $(document).ready(function () {
     autoView();
     
     $(document).on('click','.logout',function(){
-        console.log("已退出");
+        alert("已退出")
         localStorage.clear()
         sessionStorage.clear()
     })
@@ -36,13 +36,12 @@ $(document).ready(function () {
     })
 
     $.ajax({
-        url: "http://127.0.0.1:8080/api/?data=classify",
+        url: "http://127.0.0.1:8080/api/?param=classify_all",
         type: "get",
-        success:function (data){
-            var bookClassify = JSON.parse(data);
-            for (let i in bookClassify){
-                console.log(bookClassify[i]);
-                $(".tagCloud-tags").append("<a>"+bookClassify[i]+"</a>");
+        success:function (ret){
+            for (let i in ret.data){
+                console.log(ret.data[i]);
+                $(".tagCloud-tags").append("<a>"+ret.data[i]+"</a>");
             }
         }
 
@@ -150,7 +149,7 @@ function goodsAdd() {
         data: JSON.stringify(goods),
         success: function (result) {
             console.log(result);
-            if (result.status == "success") {
+            if (result.status === "success") {
                 alert("添加成功")
             } else {
                 alert("添加失败")
@@ -175,7 +174,7 @@ function goodsDelete() {
         contentType: "application/json;charset=utf-8",
         success: function (result) {
             console.log(result);
-            if (result.status == "success") {
+            if (result.status === "success") {
                 alert("删除成功")
             } else {
                 alert("删除失败")
@@ -195,12 +194,17 @@ function usersUpdate() {
     let usersEmail = widget.find('input[name=usersEmail]').val();
     let usersPasswd = widget.find('input[name=usersPasswd]').val();
     let usersAdmin = widget.find('input[name=usersAdmin]').val();
+    if(usersAdmin === "true"){
+        usersAdmin = true
+    } else {
+        usersAdmin = false
+    }
     let users = {
-        "uid":usersId,
+        "uid": parseInt(usersId),
         "username": usersName,
         "password": usersPasswd,
         "email": usersEmail,
-        "admin": usersAdmin
+        "is_admin": usersAdmin
     };
     
     $.ajax({
@@ -211,7 +215,7 @@ function usersUpdate() {
         data: JSON.stringify(users),
         success: function (result) {
             console.log(result);
-            if (result.status == "success") {
+            if (result.status === "success") {
                 alert("修改成功")
             } else {
                 alert("修改失败")
@@ -232,11 +236,16 @@ function usersAdd() {
     let usersEmail = widget.find('input[name=usersEmail]').val();
     let usersPasswd = widget.find('input[name=usersPasswd]').val();
     let usersAdmin = widget.find('input[name=usersAdmin]').val();
+    if(usersAdmin === "true"){
+        usersAdmin = true
+    } else {
+        usersAdmin = false
+    }
     let users = {
         "name": usersName,
         "password": usersPasswd,
         "email": usersEmail,
-        "admin": usersAdmin
+        "is_admin": usersAdmin
     };
     
     $.ajax({
@@ -247,7 +256,7 @@ function usersAdd() {
         data: JSON.stringify(users),
         success: function (result) {
             console.log(result);
-            if (result.status == "success") {
+            if (result.status === "success") {
                 alert("添加成功")
             } else {
                 alert("添加失败")
@@ -272,7 +281,7 @@ function usersDelete() {
         contentType: "application/json;charset=utf-8",
         success: function (result) {
             console.log(result);
-            if (result.status == "success") {
+            if (result.status === "success") {
                 alert("删除成功")
             } else {
                 alert("删除失败")
@@ -288,13 +297,13 @@ function usersDelete() {
 
 function autoView() {
     
-
+    $('.tagCloud').hide();
     $('#main-menu li').removeClass('current');
     if(location.hash == "#index"){
+        $('.tagCloud').show();
         $('#main-menu li:eq(0)').addClass('current');
     }
     if(location.hash == "#goods"){
-        $('.tagCloud').hide();
         $('#main-menu li:eq(1)').addClass('current');
         $('.goodsUpdate').show();
     } else {

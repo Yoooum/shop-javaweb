@@ -41,17 +41,24 @@ public class RouterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws IOException {
         switch (req.getParameter("param")) {
+            //当前用户
             case "login": login(req, resp);break;
             case "register": register(req, resp);break;
+            //共用
+            case "user_update":
+            case "users_update":
+                userUpdate(req,resp);break;
+            //商品管理
             case "goods_all": goodsAllList(req, resp);break;
-            case "users_all": userAllList(req,resp); break;
-            case "classify_all": classifyAllList(req, resp);break;
             case "goods_add": goodsAdd(req, resp);break;
             case "goods_delete": goodsDelete(req, resp);break;
             case "goods_update": goodsUpdate(req, resp);break;
+            case "classify_all": classifyAllList(req, resp);break;
+            //用户管理
             case "users_add": usersAdd(req, resp);break;
             case "users_delete": usersDelete(req, resp);break;
-            case "user_update": userUpdate(req,resp);break;
+            case "users_all": userAllList(req,resp); break;
+
             default: resp.sendError(404);
         }
     }
@@ -115,14 +122,18 @@ public class RouterServlet extends HttpServlet {
         user.setEmail(json.getString("email"));
         user.setUsername(json.getString("username"));
         user.setPassword(json.getString("password"));
-        user.setAdmin(json.getBoolean("admin"));
+        user.setAdmin(json.getBoolean("is_admin"));
         SqlSession sqlSession = SqlSessionUtil.getSession();
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
-        userMapper.updateUser(user);
         PrintWriter out = resp.getWriter();
         Map<String,Object>  map = new HashMap<>();
-        map.put("status", "success");
-        map.put("msg", "修改成功");
+        if(userMapper.updateUser(user)!=1){
+            map.put("status", "success");
+            map.put("msg", "修改成功");
+        }else {
+            map.put("status", "fail");
+            map.put("msg", "修改失败");
+        }
         out.write(JSON.toJSONString(map));
     }
 

@@ -16,7 +16,7 @@ public interface UserMapper {
     //通过 uid 删除用户
     int deleteUser(@Param("uid") Integer uid);
     //修改
-    Boolean updateUser(User user);
+    int updateUser(User user);
     //通过id查
     User selectUserById(@Param("uid") Integer uid);
     //通过邮箱查，数据库为唯一值
