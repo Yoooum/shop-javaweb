@@ -14,7 +14,7 @@
                 $(this).children('input[key=username]').val(users.username);
                 $(this).children('input[key=email]').val(users.email);
                 $(this).children('input[key=password]').val(users.password);
-                $(this).children('input[key=admin]').val(users.admin);
+                $(this).children('input[key=is_admin]').val(users.admin);
             });
         })
 
@@ -32,7 +32,7 @@
                         html += '<td key="username">' + users[i].username + '</td>';
                         html += '<td key="email">' + users[i].email + '</td>';
                         html += '<td key="password">' + users[i].password + '</td>';
-                        html += '<td key="admin">' + users[i].admin + '</td>';   
+                        html += '<td key="is_admin">' + users[i].admin + '</td>';   
                         html += '<td key="update"><button class="users-update-btn">修改</button></td>';
                         html += '</tr>';
                     }

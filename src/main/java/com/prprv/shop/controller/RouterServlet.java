@@ -127,7 +127,7 @@ public class RouterServlet extends HttpServlet {
         UserMapper userMapper = sqlSession.getMapper(UserMapper.class);
         PrintWriter out = resp.getWriter();
         Map<String,Object>  map = new HashMap<>();
-        if(userMapper.updateUser(user)!=1){
+        if(userMapper.updateUser(user)==1){
             map.put("status", "success");
             map.put("msg", "修改成功");
         }else {
