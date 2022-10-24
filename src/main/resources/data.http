@@ -4,8 +4,8 @@ Accept: application/json
 Content-Type: application/json
 
 {
-    "email": "测试@v.v",
-    "password": "123456"
+    "email": "测试@test",
+    "password": "test"
 }
 
 ### 注册
