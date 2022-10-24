@@ -29,7 +29,13 @@
   - 由于**数据库数据**不统一，使用远程数据库同步数据
 
 - Ajax
-  - 根据**Tomcat**部署配置的不同，请求链接会有些许差异
+  - 根据**Tomcat**部署配置的不同，请求链接会有些许差异。  
+    请求和接收内容均使用json格式
+  
+- 传参
+  - 统一后端接收地址为 localhost:8080/api/?param=action  
+  
+    后端用 switch(param) 遍历 url 的 action 来响应对应请求，减少servlet类的编写
 
 
 
